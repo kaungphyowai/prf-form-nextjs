@@ -134,7 +134,7 @@ const ExtendForm = ({userInfo, setloading, formFillingPerson}) => {
     
             <Button component="label" onChange={(event) => filehandler(event.target.files, setfiles, files)} variant="contained" startIcon={<CloudUploadIcon />}>
                  Upload file
-                <VisuallyHiddenInput type="file" multiple required />
+                <VisuallyHiddenInput type="file" multiple />
             </Button>
             {files ? files.map(url => <img style={{'width': 100, 'height': 100}} src={url}/>): <h1>Hello</h1>} 
             <Button
