@@ -42,6 +42,5 @@ var requestOptions = {
 };
 
   let response = await fetch(`/api/createNewUser`, requestOptions)
-  let json = await response.json();
   location.reload();
 }
