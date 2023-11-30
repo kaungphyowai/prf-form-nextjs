@@ -41,10 +41,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-await fetch("/api/createNewUser", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
+await fetch(`/api/createNewUser`, requestOptions)
 
   //Delete all the ScreenShot from server after Upload
   myHeaders = new Headers();
