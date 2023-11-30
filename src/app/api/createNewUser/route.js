@@ -17,9 +17,7 @@ var requestOptions = {
   redirect: 'follow'
 };
 
-fetch("https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblF0xccXeUryzaL1", requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-    return Response.json({})
+let response = await fetch("https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblF0xccXeUryzaL1", requestOptions)
+  let json = await response.json();
+    return Response.json(response)
 }
