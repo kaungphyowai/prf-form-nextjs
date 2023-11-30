@@ -19,7 +19,7 @@ import ChecklistIcon from '@mui/icons-material/Checklist';
 import SettingsIcon from '@mui/icons-material/Settings';
 import SupportIcon from '@mui/icons-material/Support';
 import LogoutIcon from '@mui/icons-material/Logout';
-import ThemeRegistry from '@/components/ThemeRegistry/ThemeRegistry';
+import ThemeRegistry from '../components/ThemeRegistry/ThemeRegistry';
 import { ThemeProvider } from '@emotion/react';
 import { createTheme } from '@mui/material';
 

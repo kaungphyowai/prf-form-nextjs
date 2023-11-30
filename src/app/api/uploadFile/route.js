@@ -4,10 +4,10 @@ import { stat, mkdir, writeFile } from "fs/promises";
 import * as dateFn from "date-fns";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function POST(request: NextRequest) {
+ 
+export async function POST(request ) {
   const formData = await request.formData();
-
-  const file = formData.get("file") as Blob | null;
+  const file = formData.get("file");
   if (!file) {
     return NextResponse.json(
       { error: "File blob is required." },
@@ -21,7 +21,7 @@ export async function POST(request: NextRequest) {
 
   try {
     await stat(uploadDir);
-  } catch (e: any) {
+  } catch (e ) {
     if (e.code === "ENOENT") {
       await mkdir(uploadDir, { recursive: true });
     } else {
@@ -51,4 +51,7 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     );
   }
+
+
+
 }
