@@ -29,9 +29,10 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import CreateOrExtend from './UI/CreateOrExtend/CreateOrExtend'
 import ResponsiveAppBar from './UI/AppBar/AppBar'
+import ExtendUser from './UI/ExtendUser/ExtendUser'
 
 export default function HomePage() {
-  const [page, setPage] = React.useState(1);
+  const [page, setPage] = React.useState(2);
 
   return (
       <Container component='main' maxWidth='xl' disableGutters>
@@ -43,7 +44,7 @@ export default function HomePage() {
           page == 1 && <CreateOrExtend />
         }
         {
-          page == 2 && <h1>this is extended form</h1>
+          page == 2 && <ExtendUser />
         }
         
     </Container>
