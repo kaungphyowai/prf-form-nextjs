@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -22,36 +24,29 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
-import { Autocomplete, FormLabel, Radio, RadioGroup } from '@mui/material';
+import { Autocomplete, FormLabel, Radio, RadioGroup, Tab, Tabs } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
-import CheckUser from './CheckUser';
-
-
+import CreateOrExtend from './UI/CreateOrExtend/CreateOrExtend'
+import ResponsiveAppBar from './UI/AppBar/AppBar'
 
 export default function HomePage() {
-
+  const [page, setPage] = React.useState(1);
 
   return (
-      <Container component='main' maxWidth='xs'>
+      <Container component='main' maxWidth='xl' disableGutters>
+        <ResponsiveAppBar setPage={setPage} />
         <CssBaseline />
-
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-          PRFHQ Member Registration Form
-          </Typography>
-          <CheckUser />
-        </Box>
+        
+    <Container component='section' maxWidth='xs'>
+        {
+          page == 1 && <CreateOrExtend />
+        }
+        {
+          page == 2 && <h1>this is extended form</h1>
+        }
+        
+    </Container>
       </Container>
   );
 }
