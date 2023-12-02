@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Button, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
+import { Autocomplete, Box, Button, FormControlLabel, FormLabel, ImageList, ImageListItem, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import createFormSubmit from '../utilites/createForm/createformSubmit'
 import { v4 as uuidv4 } from 'uuid';
@@ -125,7 +125,22 @@ const CreateForm = ({userInfo, setloading, formFillingPerson}) => {
                  Upload file
                 <VisuallyHiddenInput type="file" multiple/>
             </Button>
-            {files ? files.map(url => <img style={{'width': 100, 'height': 100}} src={url}/>): <h1>Hello</h1>} 
+             
+            {
+              files.length != 0 && <ImageList sx={{ width: 500, height: 200 }} cols={3} rowHeight={164}>
+              {files.map((item) => (
+                <ImageListItem key={item.href}>
+                  <img
+                    src={`${item.href}`}
+                    alt={"hello"}
+                    loading="lazy"
+                  />
+                </ImageListItem>
+              ))}
+              </ImageList>
+            }
+            
+
             <Button
             type = 'submit'
             fullWidth
@@ -140,3 +155,4 @@ const CreateForm = ({userInfo, setloading, formFillingPerson}) => {
 }
 
 export default CreateForm
+

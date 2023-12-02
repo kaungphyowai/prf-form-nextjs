@@ -30,7 +30,7 @@ var raw = JSON.stringify({
         "notes": notes,
         "contact_person_link": contactLink,
         "wallet": [wallet.id],
-        "screenshot": files.map((url) => {return {url: `https://${window.location.hostname}${url}`}}),
+        "screenshot": files.map((url) => {return {url: url.href}}),
         "notion_form_filled_person": formFillingPerson
 
         

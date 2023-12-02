@@ -39,7 +39,7 @@ Amplify.configure(config);
 
 
 function HomePage({ signOut, user }) {
-  const [page, setPage] = React.useState(2);
+  const [page, setPage] = React.useState(1);
 
   return (
       <Container component='main' maxWidth='xl' disableGutters>
