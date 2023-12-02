@@ -1,11 +1,11 @@
 'use client'
 
 import { Box, Button, CircularProgress, TextField } from "@mui/material"
-import checkUserSubmit from "./utilites/checkUserSubmit"
+import checkUserSubmit from "../../utilites/checkUserSubmit"
 import { use, useState } from "react"
-import { ExtendOrNot } from "./UI/ExtendOrNot";
-import CreateForm from "./UI/CreateForm";
-import ExtendForm from "./UI/ExtendForm";
+import { ExtendOrNot } from "../ExtendOrNot";
+import CreateForm from "../CreateForm";
+import ExtendForm from "../ExtendForm";
 import { useSearchParams } from 'next/navigation'
 
 export default function CheckUser() {

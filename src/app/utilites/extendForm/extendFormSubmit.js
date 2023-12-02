@@ -9,7 +9,7 @@ export default async function extendFormSubmit(event, currency, supportRegion, f
     const notes = data.get("notes")
     const contactLink = data.get("contactLink")
     console.log(files)
-
+    console.log("First URL of Image: " + files[0].href)
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
     console.log(window.location.hostname)
@@ -27,7 +27,7 @@ var raw = JSON.stringify({
         "notes": notes,
         "contact_person_link": contactLink,
         "wallet": [wallet.id],
-        "screenshot": files.map((url) => {return {url: `https://${window.location.hostname}${url}`}}),
+        "screenshot": files.map((url) => {return {url: url.href}}),
         "notion_form_filled_person": formFillingPerson
       }
     }
@@ -42,6 +42,5 @@ var requestOptions = {
 };
 
   let response = await fetch(`/api/createNewUser`, requestOptions)
-  let json = await response.json();
   location.reload();
 }

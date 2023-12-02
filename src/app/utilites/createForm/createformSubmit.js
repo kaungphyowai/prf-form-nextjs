@@ -2,7 +2,6 @@ import { useSearchParams } from 'next/navigation'
 
 export default async function createFormSubmit(event, currency, supportRegion ,files, userInfo, setloading, formFillingPerson) {
     event.preventDefault();
-
     setloading(true)
     const data = new FormData(event.currentTarget);
     const amount = data.get("amount")
@@ -30,7 +29,7 @@ var raw = JSON.stringify({
         "notes": notes,
         "contact_person_link": contactLink,
         "wallet": [wallet.id],
-        "screenshot": files.map((url) => {return {url: `https://${window.location.hostname}${url}`}}),
+        "screenshot": files.map((url) => {return {url: url.href}}),
         "notion_form_filled_person": formFillingPerson
 
         
@@ -46,28 +45,9 @@ var requestOptions = {
   redirect: 'follow'
 };
 
- await fetch(`/api/createNewUser`, requestOptions)
+ let response = await fetch(`/api/createNewUser`, requestOptions)
 
-  //Delete all the ScreenShot from server after Upload
-   myHeaders = new Headers();
-   myHeaders.append("Content-Type", "application/json");
-
-  var raw = JSON.stringify(files);
-
-var requestOptions = {
-  method: 'DELETE',
-  headers: myHeaders,
-  body: raw,
-  redirect: 'follow'
-};
-
-const delay = ms => new Promise(res => setTimeout(res, ms));
-await delay(5000)
-
-await fetch(`/api/deleteFile`, requestOptions)
-  .then(response => response.text())
-  .then(result => console.log(result))
-  .catch(error => console.log('error', error));
-  location.reload();
+ let json = await response.json();
+ location.reload();
 
 }

@@ -1,3 +1,5 @@
+'use client'
+
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
@@ -22,37 +24,42 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Stack from '@mui/material/Stack';
 import Paper from '@mui/material/Paper';
-import { Autocomplete, FormLabel, Radio, RadioGroup } from '@mui/material';
+import { Autocomplete, FormLabel, Radio, RadioGroup, Tab, Tabs } from '@mui/material';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
-import CheckUser from './CheckUser';
+import CreateOrExtend from './UI/CreateOrExtend/CreateOrExtend'
+import ResponsiveAppBar from './UI/AppBar/AppBar'
+import ExtendUser from './UI/ExtendUser/ExtendUser'
+import { Amplify } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import config from '../amplifyconfiguration.json';
+Amplify.configure(config);
 
 
+export const UserContext = React.createContext()
 
-export default function HomePage() {
-
+function HomePage({ signOut, user }) {
+  const [page, setPage] = React.useState(1);
 
   return (
-      <Container component='main' maxWidth='xs'>
+    <UserContext.Provider value={user}>
+      <Container component='main' maxWidth='xl' disableGutters>
+        <ResponsiveAppBar setPage={setPage} signOut={signOut} />
         <CssBaseline />
-
-        <Box
-          sx={{
-            marginTop: 8,
-            display: 'flex',
-            flexDirection: 'column',
-            alignItems: 'center',
-          }}
-        >
-          <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-          PRFHQ Member Registration Form
-          </Typography>
-          <CheckUser />
-        </Box>
+        
+    <Container component='section' maxWidth='xs'>
+        {
+          page == 1 && <CreateOrExtend />
+        }
+        {
+          page == 2 && <ExtendUser />
+        }
+        
+    </Container>
       </Container>
+      </UserContext.Provider>
   );
 }
 
+export default withAuthenticator(HomePage);
