@@ -1,9 +1,10 @@
 import { Autocomplete, Box, Button, FormControlLabel, FormLabel, Radio, RadioGroup, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import extendFormSubmit from '../utilites/extendForm/extendFormSubmit'
 import filehandler from '../utilites/createForm/fileHandler';
+import { UserContext } from '../page';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -17,7 +18,7 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const ExtendForm = ({userInfo, setloading, formFillingPerson}) => {
+const ExtendForm = ({userInfo, setloading}) => {
     const [wallets, setwallets] = useState()
     const [currency, setcurrency] = useState();
     const [supportRegion, setsupportRegion] = useState('မြန်မာတနိုင်ငံလုံး')
@@ -30,6 +31,7 @@ const ExtendForm = ({userInfo, setloading, formFillingPerson}) => {
     .then(data => (setwallets(data)))
     }, [])
 
+    const formFillingPerson = useContext(UserContext).username;
   return (
     <>
         <Typography component="h1" variant="h5">

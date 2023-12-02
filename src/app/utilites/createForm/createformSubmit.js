@@ -2,7 +2,6 @@ import { useSearchParams } from 'next/navigation'
 
 export default async function createFormSubmit(event, currency, supportRegion ,files, userInfo, setloading, formFillingPerson) {
     event.preventDefault();
-
     setloading(true)
     const data = new FormData(event.currentTarget);
     const amount = data.get("amount")
@@ -30,7 +29,7 @@ var raw = JSON.stringify({
         "notes": notes,
         "contact_person_link": contactLink,
         "wallet": [wallet.id],
-        "screenshot": files.map((url) => {return {url: `https://${window.location.hostname}${url}`}}),
+        "screenshot": files.map((url) => {return {url: url.href}}),
         "notion_form_filled_person": formFillingPerson
 
         

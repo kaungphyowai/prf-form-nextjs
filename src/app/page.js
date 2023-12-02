@@ -30,13 +30,22 @@ import { styled } from '@mui/material/styles';
 import CreateOrExtend from './UI/CreateOrExtend/CreateOrExtend'
 import ResponsiveAppBar from './UI/AppBar/AppBar'
 import ExtendUser from './UI/ExtendUser/ExtendUser'
+import { Amplify } from 'aws-amplify';
+import { withAuthenticator } from '@aws-amplify/ui-react';
+import '@aws-amplify/ui-react/styles.css';
+import config from '../amplifyconfiguration.json';
+Amplify.configure(config);
 
-export default function HomePage() {
-  const [page, setPage] = React.useState(2);
+
+export const UserContext = React.createContext()
+
+function HomePage({ signOut, user }) {
+  const [page, setPage] = React.useState(1);
 
   return (
+    <UserContext.Provider value={user}>
       <Container component='main' maxWidth='xl' disableGutters>
-        <ResponsiveAppBar setPage={setPage} />
+        <ResponsiveAppBar setPage={setPage} signOut={signOut} />
         <CssBaseline />
         
     <Container component='section' maxWidth='xs'>
@@ -49,6 +58,8 @@ export default function HomePage() {
         
     </Container>
       </Container>
+      </UserContext.Provider>
   );
 }
 
+export default withAuthenticator(HomePage);
