@@ -1,10 +1,11 @@
 import { Autocomplete, Box, Button, FormControlLabel, FormLabel, ImageList, ImageListItem, Radio, RadioGroup, Stack, TextField, Typography } from '@mui/material'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import createFormSubmit from '../utilites/createForm/createformSubmit'
 import { v4 as uuidv4 } from 'uuid';
 import filehandler from '../utilites/createForm/fileHandler';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
+import { UserContext } from '../page';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -18,7 +19,7 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const CreateForm = ({userInfo, setloading, formFillingPerson}) => {
+const CreateForm = ({userInfo, setloading}) => {
     //LOAD THE WALLETS
     const [wallets, setwallets] = useState()
     const [currency, setcurrency] = useState();
@@ -32,6 +33,7 @@ const CreateForm = ({userInfo, setloading, formFillingPerson}) => {
     .then(data => (setwallets(data)))
     }, [])
     
+    const formFillingPerson = useContext(UserContext).username
     
 
     return(

@@ -2,7 +2,6 @@ import { useSearchParams } from 'next/navigation'
 
 export default async function createFormSubmit(event, currency, supportRegion ,files, userInfo, setloading, formFillingPerson) {
     event.preventDefault();
-
     setloading(true)
     const data = new FormData(event.currentTarget);
     const amount = data.get("amount")
