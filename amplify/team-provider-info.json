@@ -17,12 +17,6 @@
       },
       "storage": {
         "screenShot": {}
-      },
-      "hosting": {
-        "amplifyhosting": {
-          "appId": "d2r7nxd5y2jqnq",
-          "type": "manual"
-        }
       }
     }
   }
