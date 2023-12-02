@@ -17,7 +17,7 @@ const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 const navItems = ['အသစ်သွင်းခြင်း', 'သက်တမ်းတိုးခြင်း'];
 
-function ResponsiveAppBar({setPage}) {
+function ResponsiveAppBar({setPage, signOut}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
@@ -35,9 +35,12 @@ function ResponsiveAppBar({setPage}) {
     setPage()
   };
 
-  const handleCloseUserMenu = () => {
+  const handleCloseUserMenu = (event, setting) => {
     setAnchorElUser(null);
-    console.log("closeUser")
+    if(setting == 'Logout')
+    {
+      signOut()
+    }
   };
 
   const handleClick = (page) => {
@@ -108,7 +111,7 @@ function ResponsiveAppBar({setPage}) {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                <MenuItem key={setting} onClick={(event) => handleCloseUserMenu(event, setting)}>
                   <Typography textAlign="center">{setting}</Typography>
                 </MenuItem>
               ))}
