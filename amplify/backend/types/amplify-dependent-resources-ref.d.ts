@@ -1,6 +1,6 @@
 export type AmplifyDependentResourcesAttributes = {
   "auth": {
-    "prfnextforma798f34f": {
+    "prfformnext3d1b796f": {
       "AppClientID": "string",
       "AppClientIDWeb": "string",
       "IdentityPoolId": "string",
@@ -11,7 +11,7 @@ export type AmplifyDependentResourcesAttributes = {
     }
   },
   "storage": {
-    "screenShot": {
+    "prfForm": {
       "BucketName": "string",
       "Region": "string"
     }

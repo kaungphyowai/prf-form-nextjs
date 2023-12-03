@@ -1,6 +1,6 @@
 {
   "auth": {
-    "prfnextforma798f34f": {
+    "prfformnext3d1b796f": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -16,7 +16,9 @@
           "EMAIL"
         ],
         "socialProviders": [],
-        "usernameAttributes": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
         "verificationMechanisms": [
           "EMAIL"
         ]
@@ -25,9 +27,8 @@
       "service": "Cognito"
     }
   },
-  "hosting": {},
   "storage": {
-    "screenShot": {
+    "prfForm": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"

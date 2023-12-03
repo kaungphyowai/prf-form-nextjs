@@ -1,7 +1,7 @@
 {
-  "resourceName": "screenShot",
-  "policyUUID": "4761189f",
-  "bucketName": "prfscreenshot",
+  "resourceName": "prfForm",
+  "policyUUID": "7539bfc0",
+  "bucketName": "screenshot",
   "storageAccess": "authAndGuest",
   "guestAccess": [
     "READ"
