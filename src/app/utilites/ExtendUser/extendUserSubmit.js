@@ -1,4 +1,4 @@
-export default async function extendUserSubmit(event, currency, supportRegion ,files, setloading, formFillingPerson) {
+export default async function extendUserSubmit(event, currency, supportRegion ,files, setloading, formFillingPerson, setuserExist) {
     event.preventDefault()
     
     setloading(true)
@@ -28,11 +28,13 @@ export default async function extendUserSubmit(event, currency, supportRegion ,f
 
     const result =  await fetch("/api/getUserId", requestOptions)
     let json = await result.json();
+
     //if the data is not there
-    if(!result)
+    if(!json)
     {
         //handle the case
-
+        setuserExist(false)
+        return;
     }
     //if the data is there -> upload to airtable
     var myHeaders = new Headers();

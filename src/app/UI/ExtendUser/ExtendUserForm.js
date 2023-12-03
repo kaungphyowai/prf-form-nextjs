@@ -1,4 +1,4 @@
-import { Autocomplete, Box, Button, CircularProgress, FormControlLabel, FormLabel, ImageList, ImageListItem, Radio, RadioGroup, TextField } from '@mui/material'
+import { Alert, AlertTitle, Autocomplete, Box, Button, CircularProgress, FormControlLabel, FormLabel, ImageList, ImageListItem, Radio, RadioGroup, TextField } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import extendUserSubmit from '../../utilites/ExtendUser/extendUserSubmit'
 import { styled } from '@mui/material/styles';
@@ -27,6 +27,9 @@ const ExtendUserForm = () => {
   const [supportRegion, setsupportRegion] = useState('မြန်မာတနိုင်ငံလုံး')
   const [files, setfiles] = useState([])
 
+  //check if the user exist
+  const [userExist, setuserExist] = useState(true)
+
   //Load the Wallet on Component Mount
   useEffect(() => {
     fetch("/api/loadWallet")
@@ -37,11 +40,15 @@ const ExtendUserForm = () => {
   const formFillingPerson = useContext(UserContext).username
 
   return (
+    !userExist ? (<Alert severity="error">
+    <AlertTitle>Error</AlertTitle>
+    ဒီ user မရှိပါဘူး — <strong>အရင်စာရင်းသွင်းပါ</strong>
+  </Alert>) :
     loading ? (<Box sx={{ display: 'flex' }}>
       <CircularProgress />
     </Box>):
       (
-        <Box component="form" onSubmit={(event) => extendUserSubmit(event, currency, supportRegion, files, setloading, formFillingPerson)}  sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={(event) => extendUserSubmit(event, currency, supportRegion, files, setloading, formFillingPerson, setuserExist)}  sx={{ mt: 1 }}>
           <TextField
               autoFocus
               margin="normal"
