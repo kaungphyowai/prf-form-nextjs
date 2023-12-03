@@ -42,7 +42,10 @@ export const ExtendOrNot = ({userInfo, sethasContinue}) => {
                 </TableContainer>
                 <Stack spacing={2} direction="row" justifyContent={'flex-end'} sx={{ mt: 3, mb: 2, }}>
                     <Button variant="contained" onClick={() => sethasContinue(true)} >Continue</Button>
-                    <Button variant="contained" color='error' onClick={() => sethasContinue(false)}>Decline</Button>
+                    <Button variant="contained" color='error' onClick={() => {
+                        sethasContinue(false)
+                        location.reload();  // reload the page  
+                        }}>Decline</Button>
             </Stack>
         </Box>
         
