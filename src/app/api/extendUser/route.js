@@ -1,6 +1,10 @@
 export const dynamic = 'force-dynamic' // defaults to force-static
 
 export async function POST(request) {
+
+    //get customer ID based on the PRF no  
+    
+
     const text = await request.text()
     console.log(text);
 
