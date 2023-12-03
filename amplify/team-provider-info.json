@@ -17,6 +17,12 @@
       },
       "storage": {
         "prfForm": {}
+      },
+      "hosting": {
+        "amplifyhosting": {
+          "appId": "d2wrc7p0en7axv",
+          "type": "cicd"
+        }
       }
     }
   }
