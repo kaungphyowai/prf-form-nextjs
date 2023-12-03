@@ -120,6 +120,14 @@ const ExtendUserForm = () => {
             defaultValue={supportRegion}
             renderInput={(params) => <TextField {...params} label="Support Region" required />}
             />
+            <TextField
+                  margin="normal"
+                  fullWidth
+                  id="manychat"
+                  label="Many Chat ID"
+                  name="manychat"
+                  type='number'
+                />
     
                 <TextField
                   margin="normal"

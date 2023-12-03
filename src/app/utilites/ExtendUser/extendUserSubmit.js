@@ -6,6 +6,7 @@ export default async function extendUserSubmit(event, currency, supportRegion ,f
     const data = new FormData(event.currentTarget)
     const prfno = data.get('prfno')
     const amount = data.get("amount")
+    const manychat = data.get('manychat')
     const month = data.get("month");
     const wallet = JSON.parse(data.get("wallets"))  // wallet = {id: .., name: ...} -> need to put id into the field
     const notes = data.get("notes")

@@ -6,6 +6,7 @@ export default async function createFormSubmit(event, currency, supportRegion ,f
     const data = new FormData(event.currentTarget);
     const amount = data.get("amount")
     const month = data.get("month");
+    const manychat = data.get('manychat')
     console.log(month)
     const wallet = JSON.parse(data.get("wallets"))
     const notes = data.get("notes")
