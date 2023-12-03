@@ -4,6 +4,7 @@ import extendUserSubmit from '../../utilites/ExtendUser/extendUserSubmit'
 import { styled } from '@mui/material/styles';
 import { UserContext } from '../../HomePage';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
+import filehandler from '../../utilites/createForm/fileHandler';
 
 
 const VisuallyHiddenInput = styled('input')({
@@ -40,7 +41,7 @@ const ExtendUserForm = () => {
       <CircularProgress />
     </Box>):
       (
-        <Box component="form" onSubmit={extendUserSubmit}  sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={(event) => extendUserSubmit(event, currency, supportRegion, files, setloading, formFillingPerson)}  sx={{ mt: 1 }}>
           <TextField
               autoFocus
               margin="normal"
@@ -48,7 +49,7 @@ const ExtendUserForm = () => {
               fullWidth
               name="prfno"
               label="PRF-NO"
-              type="number"
+              type="string"
               id="prfno"
             />
             <TextField
