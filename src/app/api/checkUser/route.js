@@ -8,18 +8,18 @@ export async function POST(request) {
     const {name, email} = await request.json()
 
     //get the customer data base
-    let response;
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", `Bearer ${process.env.AIRTABLE_TOKEN}`);
-    myHeaders.append("Cookie", "brw=brwb8tzTqMzSEOnxJ");
+    myHeaders.append("Authorization", "Bearer patnpQ4mDC9KXdrtF.e9246b8367c0a009d3e873d9d1f514912e0139ee100f4835a729727101c18ed4");
+    myHeaders.append("Cookie", "brw=brwb8tzTqMzSEOnxJ; AWSALB=q0M9u0z8adQoHf839TIv42MWfxs27RilDRAi9z1GULKpLzBj+OW1pgPIfs9tEtyfrKt48Z7hLNYC11hQ9rkfdml27PiOPeUDeuL9hycGodaQFHXJbIwdbGOU2CWr; AWSALBCORS=q0M9u0z8adQoHf839TIv42MWfxs27RilDRAi9z1GULKpLzBj+OW1pgPIfs9tEtyfrKt48Z7hLNYC11hQ9rkfdml27PiOPeUDeuL9hycGodaQFHXJbIwdbGOU2CWr");
 
     var requestOptions = {
     method: 'GET',
     headers: myHeaders,
     redirect: 'follow'
     };
-
-    response = await fetch("https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblidhvo53AOty6w0/", requestOptions)
+    let userNameURL = encodeURIComponent(name)
+    let emailURL = encodeURIComponent(email)
+    let response = await fetch(`https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblidhvo53AOty6w0?filterByFormula=IF(AND(%22${userNameURL}%22+%3D+Name%2C+%22${emailURL}%22+%3D+Email)%2CTRUE()%2CFALSE())`, requestOptions)
     
 
 
