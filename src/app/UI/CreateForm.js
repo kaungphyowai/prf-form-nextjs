@@ -134,7 +134,7 @@ const CreateForm = ({userInfo, setloading}) => {
     
             <Button component="label" onChange={(event) => filehandler(event.target.files, setfiles, files)} variant="contained" startIcon={<CloudUploadIcon />}>
                  Upload file
-                <VisuallyHiddenInput type="file" multiple/>
+                <VisuallyHiddenInput type="file" multiple required/>
             </Button>
              
             {
