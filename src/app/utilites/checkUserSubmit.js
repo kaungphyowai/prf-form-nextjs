@@ -5,8 +5,8 @@ export default async function checkUserSubmit(event, setUserExistState, setFinis
     event.preventDefault();
     setFinishCheck(true)
     const data = new FormData(event.currentTarget);
-    const email = data.get("email")
-    const name = data.get("name");
+    const email = data.get("email").trim();
+    const name = data.get("name").trim();
 
     
     var myHeaders = new Headers();

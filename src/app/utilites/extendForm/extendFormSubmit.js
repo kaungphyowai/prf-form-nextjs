@@ -9,9 +9,6 @@ export default async function extendFormSubmit(event, currency, supportRegion, f
     const wallet = JSON.parse(data.get("wallets"))
     const notes = data.get("notes")
     const contactLink = data.get("contactLink")
-    const name = userInfo.name.trim();
-    const email = userInfo.email.trim();
-
     console.log(files)
     console.log("First URL of Image: " + files[0].href)
     var myHeaders = new Headers();
@@ -21,8 +18,8 @@ var raw = JSON.stringify({
   "records": [
     {
       "fields": {
-        "Name": name,
-        "Email": email,
+        "Name": userInfo.name,
+        "Email": userInfo.email,
         "Status":  "၁ - ဖောင်တင်သွင်း",
         "Currency":  currency,
         "Amount": parseInt(amount),
