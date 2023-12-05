@@ -19,38 +19,30 @@ export async function POST(request) {
     };
     let userNameURL = encodeURIComponent(name)
     let emailURL = encodeURIComponent(email)
-    let response = await fetch(`https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblidhvo53AOty6w0?filterByFormula=IF(AND(%22${userNameURL}%22+%3D+Name%2C+%22${emailURL}%22+%3D+Email)%2CTRUE()%2CFALSE())`, requestOptions)
+    let response = await fetch(`https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblidhvo53AOty6w0?filterByFormula=IF(AND(%22${userNameURL}%22+%3D+trim_name%2C+%22${emailURL}%22+%3D+trim_email)%2CTRUE()%2CFALSE())`, requestOptions)
     
 
 
     let json = await response.json();
     let records = await json.records;
-    let answer;
-
-    let i = 0;
-    for(i = 0; i < records.length; i++)
-    {
-        answer = records[i].fields['Name'] == name && records[i].fields["Email"] == email 
-        if(answer == true)
-        {
-            break;
-        }
-    }
+    let answer = false;
 
     //if userExist
-    if(answer)
+    if(records.length != 0)
     {
         return Response.json({
-            message: answer,
-            name: records[i].fields['Name'],
-            email: records[i].fields["Email"],
-            prf_no: records[i].fields["prf_card_no"],
-            expire_date: records[i].fields["expire_date (from test_hqid)"]
+            message: !answer,
+            name: records[0].fields['Name'],
+            email: records[0].fields["Email"],
+            prf_no: records[0].fields["prf_card_no"],
+            expire_date: records[0].fields["expire_date (from test_hqid)"]
         })
     }
-
+    else
+    {
 
     return Response.json({
         message: answer
     });
+    }
 }
