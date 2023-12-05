@@ -11,6 +11,8 @@ export default async function createFormSubmit(event, currency, supportRegion ,f
     const wallet = JSON.parse(data.get("wallets"))
     const notes = data.get("notes")
     const contactLink = data.get("contactLink")
+    const name = userInfo.name.trim();
+    const email = userInfo.email.trim();
 
 
     var myHeaders = new Headers();
@@ -20,8 +22,8 @@ var raw = JSON.stringify({
   "records": [
     {
       "fields": {
-        "Name": userInfo.name,
-        "Email": userInfo.email,
+        "Name": name,
+        "Email": email,
         "Status":  '၁ - ဖောင်တင်သွင်း',
         "Currency":  currency,
         "Amount": parseInt(amount),
