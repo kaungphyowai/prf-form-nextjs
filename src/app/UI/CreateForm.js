@@ -6,6 +6,7 @@ import filehandler from '../utilites/createForm/fileHandler';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import { UserContext } from '../HomePage';
+import {SUPPORTREGIONCONST} from '../variables/const'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -34,6 +35,7 @@ const CreateForm = ({userInfo, setloading}) => {
     }, [])
     
     const formFillingPerson = useContext(UserContext).username
+    console.log(SUPPORTREGIONCONST)
     
 
     return(
@@ -100,7 +102,7 @@ const CreateForm = ({userInfo, setloading}) => {
             id="supportRegion"
             onChange={(event, value) => setsupportRegion(value)}
             required
-            options={['မြန်မာတနိုင်ငံလုံး','ကချင်ပြည်နယ်', 'ကရင်ပြည်နယ်']}
+            options={SUPPORTREGIONCONST}
             sx={{ width: 300 }}
             defaultValue={supportRegion}
             renderInput={(params) => <TextField {...params} label="Support Region" required />}

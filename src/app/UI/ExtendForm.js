@@ -5,6 +5,7 @@ import { styled } from '@mui/material/styles';
 import extendFormSubmit from '../utilites/extendForm/extendFormSubmit'
 import filehandler from '../utilites/createForm/fileHandler';
 import { UserContext } from '../HomePage';
+import { SUPPORTREGIONCONST } from '../variables/const';
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -112,7 +113,7 @@ const ExtendForm = ({userInfo, setloading}) => {
             onChange={(event, value) => setsupportRegion(value)}
             required
             defaultValue={supportRegion}
-            options={['မြန်မာတနိုင်ငံလုံး','ကချင်ပြည်နယ်', 'ကရင်ပြည်နယ်']}
+            options={SUPPORTREGIONCONST}
             sx={{ width: 300 }}
             renderInput={(params) => <TextField {...params} label="Support Region" required />}
             />
