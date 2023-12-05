@@ -35,6 +35,7 @@ export default function CheckUser() {
               label="Name"
               type="text"
               id="name"
+              disabled={finishCheck}
             />
             <TextField
               margin="normal"
@@ -45,6 +46,7 @@ export default function CheckUser() {
               name="email"
               autoComplete="email"
               type='email'
+              disabled={finishCheck}
             />
 
             <Button
