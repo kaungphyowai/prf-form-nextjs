@@ -29,7 +29,8 @@ var raw = JSON.stringify({
         "contact_person_link": contactLink,
         "wallet": [wallet.id],
         "screenshot": files.map((url) => {return {url: url.href}}),
-        "notion_form_filled_person": formFillingPerson
+        "notion_form_filled_person": formFillingPerson,
+        "manychat_id": parseInt(manychat)
       }
     }
   ]
