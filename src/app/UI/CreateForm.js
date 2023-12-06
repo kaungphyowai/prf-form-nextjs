@@ -112,6 +112,7 @@ const CreateForm = ({userInfo, setloading}) => {
                   fullWidth
                   id="manychat"
                   label="Many Chat ID"
+                  required
                   name="manychat"
                   type='number'
                 />

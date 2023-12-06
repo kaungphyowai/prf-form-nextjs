@@ -121,6 +121,7 @@ const ExtendForm = ({userInfo, setloading}) => {
                   margin="normal"
                   fullWidth
                   id="manychat"
+                  required
                   label="Many Chat ID"
                   name="manychat"
                   type='number'
