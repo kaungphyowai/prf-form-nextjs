@@ -22,6 +22,7 @@
     "eslint-config-next": "latest",
     "formidable": "^3.5.1",
     "mime": "^3.0.0",
+    "mui-one-time-password-input": "^2.0.1",
     "next": "latest",
     "react": "latest",
     "react-dom": "latest",

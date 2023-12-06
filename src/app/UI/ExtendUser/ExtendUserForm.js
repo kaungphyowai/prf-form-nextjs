@@ -5,6 +5,10 @@ import { styled } from '@mui/material/styles';
 import { UserContext } from '../../HomePage';
 import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import filehandler from '../../utilites/createForm/fileHandler';
+import checkPrfSubmit from '../../utilites/ExtendUser/checkPrfSubmit'
+import {SUPPORTREGIONCONST} from '../../variables/const'
+import { MuiOtpInput } from 'mui-one-time-password-input';
+import { ExtendOrNot } from '../ExtendOrNot';
 
 
 const VisuallyHiddenInput = styled('input')({
@@ -20,15 +24,20 @@ const VisuallyHiddenInput = styled('input')({
 });
 
 const ExtendUserForm = () => {
+
   const [loading, setloading] = useState(false)
   //LOAD THE WALLETS
   const [wallets, setwallets] = useState()
   const [currency, setcurrency] = useState();
   const [supportRegion, setsupportRegion] = useState('မြန်မာတနိုင်ငံလုံး')
+  const [userInfo, setUserInfo] = useState({});
   const [files, setfiles] = useState([])
 
   //check if the user exist
-  const [userExist, setuserExist] = useState(true)
+  const [userExist, setuserExist] = useState()
+  const [checkInputComplete, setcheckInputComplete] = useState(false)
+  const [isChecking, setisChecking] = useState(false)
+  const [hasContinue, sethasContinue] = useState(false)
 
   //Load the Wallet on Component Mount
   useEffect(() => {
@@ -38,27 +47,44 @@ const ExtendUserForm = () => {
   }, [])
   
   const formFillingPerson = useContext(UserContext).username
+  const [otp, setOtp] = React.useState('')
+
+  const handleChange = (newValue) => {
+    setOtp(newValue)
+  }
 
   return (
-    !userExist ? (<Alert severity="error">
-    <AlertTitle>Error</AlertTitle>
-    ဒီ user မရှိပါဘူး — <strong>အရင်စာရင်းသွင်းပါ</strong>
-  </Alert>) :
-    loading ? (<Box sx={{ display: 'flex' }}>
+    <>
+
+    <MuiOtpInput autoFocus gap={1} length={7} validateChar={(text) => !isNaN(text)} value={otp} onChange={handleChange} onComplete={(value) => {setcheckInputComplete(true); checkPrfSubmit(value, setuserExist, setisChecking, setUserInfo)}} TextFieldsProps={{ disabled: checkInputComplete}} />
+
+    {/* //if the user don't exist */}
+    {
+      !userExist && checkInputComplete && !isChecking && (<Alert severity="error">
+      <AlertTitle>Error</AlertTitle>
+      ဒီ user မရှိပါဘူး — <strong>အရင်စာရင်းသွင်းပါ</strong>
+    </Alert>)
+    }
+
+
+
+    {isChecking && (<Box sx={{ display: 'flex' }}>
       <CircularProgress />
-    </Box>):
-      (
-        <Box component="form" onSubmit={(event) => extendUserSubmit(event, currency, supportRegion, files, setloading, formFillingPerson, setuserExist)}  sx={{ mt: 1 }}>
-          <TextField
-              autoFocus
-              margin="normal"
-              required
-              fullWidth
-              name="prfno"
-              label="PRF-NO"
-              type="string"
-              id="prfno"
-            />
+    </Box>)
+}
+    {loading && (<Box sx={{ display: 'flex' }}>
+          <CircularProgress />
+        </Box>)
+    }
+  {
+    userExist && !isChecking  && checkInputComplete && (
+      <ExtendOrNot userInfo={userInfo} sethasContinue={sethasContinue}/>
+    )
+  }
+
+    {
+      userExist && !loading && hasContinue && (
+        <Box component="form" onSubmit={(event) => extendUserSubmit(event, userInfo, currency, supportRegion, files, setloading, formFillingPerson)}  sx={{ mt: 1 }}>
             <TextField
                   margin="normal"
                   required
@@ -115,7 +141,7 @@ const ExtendUserForm = () => {
             id="supportRegion"
             onChange={(event, value) => setsupportRegion(value)}
             required
-            options={['မြန်မာတနိုင်ငံလုံး','ကချင်ပြည်နယ်', 'ကရင်ပြည်နယ်']}
+            options={SUPPORTREGIONCONST}
             sx={{ width: 300 }}
             defaultValue={supportRegion}
             renderInput={(params) => <TextField {...params} label="Support Region" required />}
@@ -148,7 +174,7 @@ const ExtendUserForm = () => {
     
             <Button component="label" onChange={(event) => filehandler(event.target.files, setfiles, files)} variant="contained" startIcon={<CloudUploadIcon />}>
                  Upload file
-                <VisuallyHiddenInput type="file" multiple/>
+                <VisuallyHiddenInput type="file" multiple required/>
             </Button>
              
             {
@@ -175,6 +201,9 @@ const ExtendUserForm = () => {
             </Button>
           </Box>
           )
+    }
+      
+          </>
   )
 }
 

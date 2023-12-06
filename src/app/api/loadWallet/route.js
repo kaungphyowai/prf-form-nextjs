@@ -39,7 +39,6 @@ export async function GET(request) {
             name: wallet
         })
    }
-   console.log(answer)
 
     return Response.json(answer);
 }
