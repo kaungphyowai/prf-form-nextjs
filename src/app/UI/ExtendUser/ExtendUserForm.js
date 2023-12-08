@@ -106,7 +106,7 @@ const ExtendUserForm = () => {
                   name="month"
                   type='number'
                   InputProps={{
-                    inputProps: { min: 0 }
+                    inputProps: { min: 1 }
                   }}
                 />
               <FormLabel id="currency">Currency</FormLabel>

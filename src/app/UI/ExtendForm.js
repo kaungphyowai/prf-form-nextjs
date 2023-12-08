@@ -76,7 +76,7 @@ const ExtendForm = ({userInfo, setloading}) => {
                   name="month"
                   type='number'
                   InputProps={{
-                    inputProps: { min: 0 }
+                    inputProps: { min: 1 }
                   }}
                 />
                 
