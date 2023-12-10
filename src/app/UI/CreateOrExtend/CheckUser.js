@@ -16,6 +16,7 @@ export default function CheckUser() {
     const [userInfo, setUserInfo] = useState({});
     const [hasContinue, sethasContinue] = useState(false)
     const [loading, setloading] = useState(false)
+    const [hasPermissonThisMonth, setHasPermissonThisMonth] = useState(true)
 
     const searchParams = useSearchParams()
     const user = searchParams.get('user')
@@ -25,7 +26,7 @@ export default function CheckUser() {
       <CircularProgress />
     </Box>):
       (<> 
-        <Box component="form" onSubmit={(event) => checkUserSubmit(event, setUserExistState, setFinishCheck, setCreateFormShow, setUserInfo)}  sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={(event) => checkUserSubmit(event, setUserExistState, setFinishCheck, setCreateFormShow, setUserInfo, setHasPermissonThisMonth)}  sx={{ mt: 1 }}>
           <TextField
               autoFocus
               margin="normal"
@@ -58,9 +59,15 @@ export default function CheckUser() {
                 >
                 Check
             </Button>
+
+          {/* If user don't have permission */}
+          {
+            !hasPermissonThisMonth && <h1>ယခုလအတွင်း ဖော်ပြပါထောက်ပို့တပ်သားအတွက် စာရင်းသွင်းထားပြီးပါပြီ။ ထူးခြားဖြစ်စဥ် ဖြစ်ပါက Admin ကိုဆက်သွယ်ပါ</h1>
+          }
+
                 {/* Ask want to extend or not */}
           {
-            userExistState && <ExtendOrNot userInfo={userInfo} sethasContinue={sethasContinue} formFillingPerson={user}/>
+            userExistState && hasPermissonThisMonth && <ExtendOrNot userInfo={userInfo} sethasContinue={sethasContinue} formFillingPerson={user}/>
           }
           </Box>
           {
@@ -68,7 +75,7 @@ export default function CheckUser() {
           }
 
           {
-            createFormShow && <CreateForm userInfo={userInfo} setloading={setloading} formFillingPerson={user}/>
+            createFormShow && hasPermissonThisMonth && <CreateForm userInfo={userInfo} setloading={setloading} formFillingPerson={user}/>
           }
         </>)
     )

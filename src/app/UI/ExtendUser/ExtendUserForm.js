@@ -38,6 +38,8 @@ const ExtendUserForm = () => {
   const [checkInputComplete, setcheckInputComplete] = useState(false)
   const [isChecking, setisChecking] = useState(false)
   const [hasContinue, sethasContinue] = useState(false)
+  const [hasPermissonThisMonth, setHasPermissonThisMonth] = useState(true)
+
 
   //Load the Wallet on Component Mount
   useEffect(() => {
@@ -56,7 +58,7 @@ const ExtendUserForm = () => {
   return (
     <>
 
-    <MuiOtpInput autoFocus gap={1} length={7} validateChar={(text) => !isNaN(text)} value={otp} onChange={handleChange} onComplete={(value) => {setcheckInputComplete(true); checkPrfSubmit(value, setuserExist, setisChecking, setUserInfo)}} TextFieldsProps={{ disabled: checkInputComplete}} />
+    <MuiOtpInput autoFocus gap={1} length={7} validateChar={(text) => !isNaN(text)} value={otp} onChange={handleChange} onComplete={(value) => {setcheckInputComplete(true); checkPrfSubmit(value, setuserExist, setisChecking, setUserInfo, setHasPermissonThisMonth)}} TextFieldsProps={{ disabled: checkInputComplete}} />
 
     {/* //if the user don't exist */}
     {
@@ -90,8 +92,15 @@ const ExtendUserForm = () => {
           <CircularProgress />
         </Box>)
     }
+
   {
-    userExist && !isChecking  && checkInputComplete && (
+    userExist && !isChecking && checkInputComplete && !hasPermissonThisMonth && (
+      <h1>ယခုလအတွင်း ဖော်ပြပါထောက်ပို့တပ်သားအတွက် စာရင်းသွင်းထားပြီးပါပြီ။ ထူးခြားဖြစ်စဥ် ဖြစ်ပါက Admin ကိုဆက်သွယ်ပါ</h1>
+    )
+  }
+  
+  {
+    userExist && !isChecking  && checkInputComplete && hasPermissonThisMonth && (
       <ExtendOrNot userInfo={userInfo} sethasContinue={sethasContinue}/>
     )
   }

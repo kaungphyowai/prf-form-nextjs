@@ -2,7 +2,7 @@
 // return if user don't exist => side effect
 // if user exist => side effect + userInfo
 
-export default async function checkPrfSubmit(prfno ,setuserExist, setisChecking, setUserInfo) {
+export default async function checkPrfSubmit(prfno ,setuserExist, setisChecking, setUserInfo, setHasPermissonThisMonth) {
 
     console.log(prfno);
     setisChecking(true)
@@ -33,6 +33,31 @@ export default async function checkPrfSubmit(prfno ,setuserExist, setisChecking,
         setisChecking(false)
         return;
     }
+
+    //check if the user has permission
+
+    var raw = JSON.stringify({
+    "name": json.name.trim(),
+    "email": json.email.trim()
+    });
+
+    var requestOptions = {
+    method: 'POST',
+    headers: myHeaders,
+    body: raw,
+    redirect: 'follow'
+    };
+
+    let response1 = await fetch("/api/checkPermission", requestOptions)
+    let bool = await response1.json()
+    if(!bool)
+    {
+        setisChecking(false)
+        setHasPermissonThisMonth(bool);
+        setuserExist(true);
+        return;
+    }
+    setHasPermissonThisMonth(true);
     
     setUserInfo({
         'name': json.name,

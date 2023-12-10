@@ -1,6 +1,7 @@
 
 
-export default async function checkUserSubmit(event, setUserExistState, setFinishCheck, setCreateFormShow, setUserInfo) {
+
+export default async function checkUserSubmit(event, setUserExistState, setFinishCheck, setCreateFormShow, setUserInfo, setHasPermissonThisMonth) {
     
     event.preventDefault();
     setFinishCheck(true)
@@ -29,14 +30,23 @@ export default async function checkUserSubmit(event, setUserExistState, setFinis
 
     let answer = await response.json();
     let userExist = answer.message;
-    console.log(answer)
 
     setUserInfo({"name": name, "email": email})
     
     //if user exist, get PRF and expire data about user
     if(userExist)
     {
-        console.log("hello I am userExist")
+        //check if the user has permission
+        console.log("This is has permission: ")
+        let response = await fetch("/api/checkPermission/", requestOptions)
+        let bool = await response.json();
+
+        console.log(bool)
+        if(!bool)
+        {
+            setHasPermissonThisMonth(bool)
+            return;
+        }
         setUserInfo({
             "name": name,
             "email": email,
