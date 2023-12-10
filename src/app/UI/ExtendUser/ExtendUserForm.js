@@ -1,4 +1,4 @@
-import { Alert, AlertTitle, Autocomplete, Box, Button, CircularProgress, FormControlLabel, FormLabel, ImageList, ImageListItem, Radio, RadioGroup, TextField } from '@mui/material'
+import { Alert, AlertTitle, Autocomplete, Box, Button, CircularProgress, FormControlLabel, FormLabel, ImageList, ImageListItem, Radio, RadioGroup, Stack, TextField } from '@mui/material'
 import React, { useContext, useEffect, useState } from 'react'
 import extendUserSubmit from '../../utilites/ExtendUser/extendUserSubmit'
 import { styled } from '@mui/material/styles';
@@ -60,10 +60,24 @@ const ExtendUserForm = () => {
 
     {/* //if the user don't exist */}
     {
-      !userExist && checkInputComplete && !isChecking && (<Alert severity="error">
+      !userExist && checkInputComplete && !isChecking && (
+      <>
+      <Alert severity="error">
       <AlertTitle>Error</AlertTitle>
       ဒီ user မရှိပါဘူး — <strong>အရင်စာရင်းသွင်းပါ</strong>
-    </Alert>)
+    </Alert>
+    <Stack spacing={2} direction="row" justifyContent={'flex-end'} sx={{ mt: 3, mb: 2, }}>
+                    <Button variant="contained" onClick={() => {
+                      setOtp('');
+                      setcheckInputComplete(false); 
+
+                    }} >သက်တမ်းပြန်တိုးမယ်</Button>
+                    <Button variant="contained" color='error' onClick={() => {
+                        location.reload();  // reload the page  
+                        }}>အသစ်သွင်းမယ်</Button>
+            </Stack>
+    </>
+    )
     }
 
 
