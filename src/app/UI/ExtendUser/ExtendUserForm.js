@@ -110,7 +110,7 @@ const ExtendUserForm = () => {
   }
 
     {
-      !userExist && !loading && !hasContinue && (
+      userExist && !loading && hasContinue && (
         <Box component="form" onSubmit={(event) => extendUserSubmit(event, userInfo, currency, supportRegion, files, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate)}  sx={{ mt: 1 }}>
             <TextField
                   autoFocus
@@ -210,7 +210,7 @@ const ExtendUserForm = () => {
     
             <Button component="label" onChange={(event) => filehandler(event.target.files, setfiles, files)} variant="contained" startIcon={<CloudUploadIcon />}>
                  Upload file
-                {/* <VisuallyHiddenInput type="file" multiple required/> */}
+                <VisuallyHiddenInput type="file" multiple required/>
             </Button>
              
             {
