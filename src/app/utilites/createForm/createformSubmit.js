@@ -1,10 +1,11 @@
 import { useSearchParams } from 'next/navigation'
 
-export default async function createFormSubmit(event, currency, supportRegion ,files, userInfo, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate) {
+export default async function createFormSubmit(event, currency, supportRegion ,files, userInfo, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate,fileExist, setfileExist) {
     event.preventDefault();
     setAmountValidate(false);
     setmonthValidate(false)
     setmanyChatValidate(false)
+    setfileExist(true)
     setloading(true)
     const data = new FormData(event.currentTarget);
     const amount = data.get("amount")
@@ -29,6 +30,14 @@ export default async function createFormSubmit(event, currency, supportRegion ,f
     if(!/^\d+$/g.test(manychat))
     {
       setmanyChatValidate(true);
+      setloading(false)
+      return;
+    }
+
+    //check if file exist
+    if(files.length == 0)
+    {
+      setfileExist(false);
       setloading(false)
       return;
     }

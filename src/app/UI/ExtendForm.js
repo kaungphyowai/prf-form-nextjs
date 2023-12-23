@@ -6,6 +6,7 @@ import extendFormSubmit from '../utilites/extendForm/extendFormSubmit'
 import filehandler from '../utilites/createForm/fileHandler';
 import { UserContext } from '../HomePage';
 import { SUPPORTREGIONCONST } from '../variables/const';
+import Dropzone from 'react-dropzone'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -28,6 +29,7 @@ const ExtendForm = ({userInfo, setloading}) => {
     const [amountValidate, setAmountValidate] = useState(false)
     const [monthValidate, setmonthValidate] = useState(false)
     const [manyChatValidate, setmanyChatValidate] = useState(false)
+    const [fileExist, setfileExist] = useState(true)
 
     //Load the Wallet on Component Mount
     useEffect(() => {
@@ -42,7 +44,7 @@ const ExtendForm = ({userInfo, setloading}) => {
         <Typography component="h1" variant="h5">
                 Extend this User
               </Typography>
-              <Box component="form"  sx={{ mt: 1 }} onSubmit={(event) => extendFormSubmit(event, currency, supportRegion, files, userInfo, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate)}>
+              <Box component="form"  sx={{ mt: 1 }} onSubmit={(event) => extendFormSubmit(event, currency, supportRegion, files, userInfo, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate, fileExist,setfileExist)}>
               <FormLabel id="prf_no">PRF No</FormLabel>
               <TextField
                   autoFocus
@@ -155,11 +157,32 @@ const ExtendForm = ({userInfo, setloading}) => {
                   type='text-area'
                 />
     
-            <Button component="label" onChange={(event) => filehandler(event.target.files, setfiles, files)} variant="contained" startIcon={<CloudUploadIcon />}>
-                 Upload file
-                <VisuallyHiddenInput type="file" multiple required />
-            </Button>
-            {files ? files.map(url => <img style={{'width': 100, 'height': 100}} src={url}/>): <h1>Hello</h1>} 
+    <div style={{"width" : "100%", width : "100%", height : "50%", border : "1px solid black"}} onDrop={(e) => {
+    e.preventDefault();
+    e.nativeEvent.dataTransfer.items[0].getAsString(function(url){
+      console.log(url)
+      if(url == null)
+      {
+        console.log("this run")
+        console.log(url)
+        return;
+      }
+      setfiles([...files, {href: url}])
+    });
+}} onDragOver={e => {e.preventDefault(); }}>
+            <Dropzone onDrop={acceptedFiles => filehandler(acceptedFiles, setfiles, files)} accept={['text/*, img/*']}>
+  {({getRootProps, getInputProps}) => (
+    <section >
+      <div {...getRootProps()} style={{padding: "20% 20%"}}>
+        <input {...getInputProps()}  />
+        <p>Drag 'n' drop some files here, or click to select files</p>
+      </div>
+    </section>
+  )}
+</Dropzone>
+            </div>
+          {!fileExist && <p style={{color: 'red'}}>You need to have a file</p>}
+            {files ? files.map(url => <img style={{'width': 100, 'height': 100}} src={url.href}/>): <h1>Hello</h1>} 
             <Button
             type = 'submit'
             fullWidth

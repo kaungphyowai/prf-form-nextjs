@@ -6,12 +6,13 @@ import { v4 as uuidv4 } from 'uuid';
 
 export default async function filehandler(files, setFile, filesState) {
     let arrayFiles= [];
-
+    console.log(files)
     // get the submitted files
     for(let i = 0; i < files.length; i++)
     {
         arrayFiles.push(files[i])
     }
+    console.log(arrayFiles)
 
     // get the previous files
 

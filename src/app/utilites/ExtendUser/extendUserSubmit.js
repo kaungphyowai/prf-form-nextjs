@@ -1,4 +1,4 @@
-export default async function extendUserSubmit(event,userInfo, currency, supportRegion ,files, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate) {
+export default async function extendUserSubmit(event,userInfo, currency, supportRegion ,files, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate, fileExist, setfileExist) {
     event.preventDefault();
     setloading(true)
     setAmountValidate(false);
@@ -27,6 +27,14 @@ export default async function extendUserSubmit(event,userInfo, currency, support
     if(!/^\d+$/g.test(manychat))
     {
       setmanyChatValidate(true);
+      setloading(false)
+      return;
+    }
+
+    //check if file exist
+    if(files.length == 0)
+    {
+      setfileExist(false);
       setloading(false)
       return;
     }
