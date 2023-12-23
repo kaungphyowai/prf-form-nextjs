@@ -1,6 +1,9 @@
-export default async function extendUserSubmit(event,userInfo, currency, supportRegion ,files, setloading, formFillingPerson) {
+export default async function extendUserSubmit(event,userInfo, currency, supportRegion ,files, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate) {
     event.preventDefault();
     setloading(true)
+    setAmountValidate(false);
+    setmonthValidate(false)
+    setmanyChatValidate(false)
     const data = new FormData(event.currentTarget);
     const amount = data.get("amount")
     const month = data.get("month");
@@ -8,6 +11,25 @@ export default async function extendUserSubmit(event,userInfo, currency, support
     const wallet = JSON.parse(data.get("wallets"))
     const notes = data.get("notes")
     const contactLink = data.get("contactLink")
+    //validate month and amount
+    if(!/^\d+$/g.test(amount))
+    {
+      setAmountValidate(true);
+      setloading(false)
+      return;
+    }
+    if(!/^\d+$/g.test(month))
+    {
+      setmonthValidate(true);
+      setloading(false)
+      return;
+    }
+    if(!/^\d+$/g.test(manychat))
+    {
+      setmanyChatValidate(true);
+      setloading(false)
+      return;
+    }
     console.log("First URL of Image: " + files[0].href)
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");

@@ -33,6 +33,10 @@ const ExtendUserForm = () => {
   const [userInfo, setUserInfo] = useState({});
   const [files, setfiles] = useState([])
 
+  const [amountValidate, setAmountValidate] = useState(false)
+  const [monthValidate, setmonthValidate] = useState(false)
+  const [manyChatValidate, setmanyChatValidate] = useState(false)
+
   //check if the user exist
   const [userExist, setuserExist] = useState()
   const [checkInputComplete, setcheckInputComplete] = useState(false)
@@ -106,16 +110,19 @@ const ExtendUserForm = () => {
   }
 
     {
-      userExist && !loading && hasContinue && (
-        <Box component="form" onSubmit={(event) => extendUserSubmit(event, userInfo, currency, supportRegion, files, setloading, formFillingPerson)}  sx={{ mt: 1 }}>
+      !userExist && !loading && !hasContinue && (
+        <Box component="form" onSubmit={(event) => extendUserSubmit(event, userInfo, currency, supportRegion, files, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate)}  sx={{ mt: 1 }}>
             <TextField
+                  autoFocus
                   margin="normal"
                   required
                   fullWidth
                   name="amount"
                   label="Amount"
-                  type="number"
+                  type="text"
                   id="amount"
+                  helperText={amountValidate && "ဂဏန်းဘဲသွင်းပါ"}
+                  error = {amountValidate}
                   InputProps={{
                     inputProps: { min: 0 }
                   }}
@@ -127,7 +134,9 @@ const ExtendUserForm = () => {
                   id="month"
                   label="Month"
                   name="month"
-                  type='number'
+                  helperText={monthValidate && "ဂဏန်းဘဲသွင်းပါ"}
+                  error = {monthValidate}
+                  type='text'
                   InputProps={{
                     inputProps: { min: 1 }
                   }}
@@ -173,10 +182,13 @@ const ExtendUserForm = () => {
                   margin="normal"
                   fullWidth
                   id="manychat"
-                  required
                   label="Many Chat ID"
+                  required
                   name="manychat"
-                  type='number'
+                  type='text'
+                  error = {manyChatValidate}
+                  helperText={manyChatValidate && "ဂဏန်းဘဲသွင်းပါ"}
+
                 />
     
                 <TextField
@@ -198,7 +210,7 @@ const ExtendUserForm = () => {
     
             <Button component="label" onChange={(event) => filehandler(event.target.files, setfiles, files)} variant="contained" startIcon={<CloudUploadIcon />}>
                  Upload file
-                <VisuallyHiddenInput type="file" multiple required/>
+                {/* <VisuallyHiddenInput type="file" multiple required/> */}
             </Button>
              
             {
