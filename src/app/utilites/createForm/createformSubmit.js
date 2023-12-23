@@ -1,21 +1,40 @@
 import { useSearchParams } from 'next/navigation'
 
-export default async function createFormSubmit(event, currency, supportRegion ,files, userInfo, setloading, formFillingPerson) {
+export default async function createFormSubmit(event, currency, supportRegion ,files, userInfo, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate) {
     event.preventDefault();
+    setAmountValidate(false);
+    setmonthValidate(false)
+    setmanyChatValidate(false)
     setloading(true)
     const data = new FormData(event.currentTarget);
     const amount = data.get("amount")
     const month = data.get("month");
     const manychat = data.get('manychat')
-    console.log(month)
     const wallet = JSON.parse(data.get("wallets"))
     const notes = data.get("notes")
     const contactLink = data.get("contactLink")
-
+    //validate month and amount
+    if(!/^\d+$/g.test(amount))
+    {
+      setAmountValidate(true);
+      setloading(false)
+      return;
+    }
+    if(!/^\d+$/g.test(month))
+    {
+      setmonthValidate(true);
+      setloading(false)
+      return;
+    }
+    if(!/^\d+$/g.test(manychat))
+    {
+      setmanyChatValidate(true);
+      setloading(false)
+      return;
+    }
 
     var myHeaders = new Headers();
 myHeaders.append("Content-Type", "application/json");
-    console.log(window.location.hostname)
 var raw = JSON.stringify({
   "records": [
     {

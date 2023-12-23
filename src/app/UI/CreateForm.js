@@ -27,6 +27,10 @@ const CreateForm = ({userInfo, setloading}) => {
     const [supportRegion, setsupportRegion] = useState('မြန်မာတနိုင်ငံလုံး')
     const [files, setfiles] = useState([])
 
+    const [amountValidate, setAmountValidate] = useState(false)
+    const [monthValidate, setmonthValidate] = useState(false)
+    const [manyChatValidate, setmanyChatValidate] = useState(false)
+
     //Load the Wallet on Component Mount
     useEffect(() => {
       fetch("/api/loadWallet")
@@ -43,7 +47,7 @@ const CreateForm = ({userInfo, setloading}) => {
             <Typography component="h1" variant="h5">
                 Create A New User
               </Typography>
-              <Box component="form"  sx={{ mt: 1 }} onSubmit={(event) => createFormSubmit(event, currency, supportRegion, files, userInfo, setloading, formFillingPerson)}>
+              <Box component="form"  sx={{ mt: 1 }} onSubmit={(event) => createFormSubmit(event, currency, supportRegion, files, userInfo, setloading, formFillingPerson, setAmountValidate, setmonthValidate, setmanyChatValidate)}>
               <TextField
                   autoFocus
                   margin="normal"
@@ -51,8 +55,10 @@ const CreateForm = ({userInfo, setloading}) => {
                   fullWidth
                   name="amount"
                   label="Amount"
-                  type="number"
+                  type="text"
                   id="amount"
+                  helperText={amountValidate && "ဂဏန်းဘဲသွင်းပါ"}
+                  error = {amountValidate}
                   InputProps={{
                     inputProps: { min: 0 }
                   }}
@@ -64,7 +70,9 @@ const CreateForm = ({userInfo, setloading}) => {
                   id="month"
                   label="Month"
                   name="month"
-                  type='number'
+                  helperText={monthValidate && "ဂဏန်းဘဲသွင်းပါ"}
+                  error = {monthValidate}
+                  type='text'
                   InputProps={{
                     inputProps: { min: 1 }
                   }}
@@ -114,7 +122,10 @@ const CreateForm = ({userInfo, setloading}) => {
                   label="Many Chat ID"
                   required
                   name="manychat"
-                  type='number'
+                  type='text'
+                  error = {manyChatValidate}
+                  helperText={manyChatValidate && "ဂဏန်းဘဲသွင်းပါ"}
+
                 />
                 <TextField
                   margin="normal"

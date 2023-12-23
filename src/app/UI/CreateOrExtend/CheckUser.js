@@ -71,7 +71,7 @@ export default function CheckUser() {
           }
           </Box>
           {
-            hasContinue && <ExtendForm userInfo={userInfo}  setloading={setloading} formFillingPerson={user}/>
+            !hasContinue && <ExtendForm userInfo={userInfo}  setloading={setloading} formFillingPerson={user}/>
           }
 
           {
