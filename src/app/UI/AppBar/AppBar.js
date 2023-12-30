@@ -15,11 +15,13 @@ import AdbIcon from '@mui/icons-material/Adb';
 
 const pages = ['Products', 'Pricing', 'Blog'];
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
-const navItems = ['အသစ်သွင်းခြင်း', 'သက်တမ်းတိုးခြင်း'];
 
-function ResponsiveAppBar({setPage, signOut}) {
+function ResponsiveAppBar({setPage, signOut, userRole}) {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  //Check if the user is Admin or not
+  const navItems = userRole !== 'admin' ? ['အသစ်သွင်းခြင်း', 'သက်တမ်းတိုးခြင်း'] : ['အသစ်သွင်းခြင်း', 'သက်တမ်းတိုးခြင်း', 'ဖောင်အဖွင့်အပိတ်'];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -41,20 +43,25 @@ function ResponsiveAppBar({setPage, signOut}) {
     {
       signOut()
     }
+    
   };
 
   const handleClick = (page) => {
+    console.log(page)
     if(page == 'အသစ်သွင်းခြင်း')
     {
         console.log(page)
         setPage(1);
     }
-    else
+    else if(page == 'ဖောင်အဖွင့်အပိတ်')
     {
         console.log(page)
-        setPage(2);
+        setPage(3);
     }
-
+    else
+    {
+      setPage(2);
+    }
   }
 
   return (
@@ -77,7 +84,7 @@ function ResponsiveAppBar({setPage, signOut}) {
               textDecoration: 'none',
             }}
           >
-            LOGO
+            PRFHQ
           </Typography>
 
           <Box sx={{ display: { xs: 'none', sm: 'block' }, flexGrow: 1}}>

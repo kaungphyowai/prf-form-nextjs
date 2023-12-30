@@ -23,6 +23,9 @@
           "appId": "d2wrc7p0en7axv",
           "type": "cicd"
         }
+      },
+      "api": {
+        "prfformnext": {}
       }
     }
   }
