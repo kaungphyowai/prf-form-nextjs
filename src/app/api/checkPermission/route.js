@@ -7,7 +7,7 @@ export const dynamic = 'force-dynamic' // defaults to force-static
 export async function POST(request) {
 
     const {name, email} = await request.json()
-
+  console.log("hello")
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer patnpQ4mDC9KXdrtF.e9246b8367c0a009d3e873d9d1f514912e0139ee100f4835a729727101c18ed4");
     myHeaders.append("Cookie", "brw=brwb8tzTqMzSEOnxJ; AWSALB=VqfDhfXjv8JiCp3lJNYXbUYmTndWTwyFShNBsWdkDM8qt85zGxNFW9yr+/FLQmTw7nAbahafAP1b1jC/mCjL+x5gJx8QYlmSGSeiIh1TKQ/PZosgNCkmW1HYRcwe; AWSALBCORS=VqfDhfXjv8JiCp3lJNYXbUYmTndWTwyFShNBsWdkDM8qt85zGxNFW9yr+/FLQmTw7nAbahafAP1b1jC/mCjL+x5gJx8QYlmSGSeiIh1TKQ/PZosgNCkmW1HYRcwe");
@@ -34,16 +34,22 @@ export async function POST(request) {
         console.log(record['notion_create_time'])
         let lastestTranscation = new Date(record['notion_create_time'])
         let lastestTranscationMonth = lastestTranscation.getMonth();
+        let lastestTranscationYear = lastestTranscation.getFullYear();
         console.log(lastestTranscationMonth)
         console.log(now)
         
+        let answer = (lastestTranscationMonth < now) || (lastestTranscationYear < nowYear)
         // only allow if latest transaction month is past
-        return Response.json(lastestTranscationMonth < now)
+        return Response.json(answer)
     }
     
+    console.log("Pay attention")
     let lastestTranscation = new Date(record['Create Time'])
     let lastestTranscationMonth = lastestTranscation.getMonth();
+    
     let lastestTranscationYear = lastestTranscation.getFullYear();
+    console.log(lastestTranscationMonth);
+    console.log(lastestTranscationYear)
     let answer = (lastestTranscationMonth < now) || (lastestTranscationYear < nowYear);
     return Response.json(answer )
 
