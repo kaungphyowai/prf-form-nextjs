@@ -28,7 +28,7 @@ export async function POST(request) {
     let records = await json.records;
     let record = records[0].fields;
     let now = new Date().getMonth();
-
+    let nowYear = new Date().getFullYear();
     if(Object.hasOwn(record, "notion_create_time"))
     {
         console.log(record['notion_create_time'])
@@ -43,7 +43,8 @@ export async function POST(request) {
     
     let lastestTranscation = new Date(record['Create Time'])
     let lastestTranscationMonth = lastestTranscation.getMonth();
-    console.log(lastestTranscation < now);
-    return Response.json(lastestTranscationMonth < now)
+    let lastestTranscationYear = lastestTranscation.getFullYear();
+    let answer = (lastestTranscationMonth < now) || (lastestTranscationYear < nowYear);
+    return Response.json(answer )
 
 }
