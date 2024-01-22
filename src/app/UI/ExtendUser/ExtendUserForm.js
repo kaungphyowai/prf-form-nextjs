@@ -25,7 +25,7 @@ const VisuallyHiddenInput = styled('input')({
   width: 1,
 });
 
-const ExtendUserForm = () => {
+const ExtendUserForm = ({userRole}) => {
 
   const [loading, setloading] = useState(false)
   //LOAD THE WALLETS
@@ -65,7 +65,7 @@ const ExtendUserForm = () => {
   return (
     <>
 
-    <MuiOtpInput autoFocus gap={1} length={7} validateChar={(text) => !isNaN(text)} value={otp} onChange={handleChange} onComplete={(value) => {setcheckInputComplete(true); checkPrfSubmit(value, setuserExist, setisChecking, setUserInfo, setHasPermissonThisMonth)}} TextFieldsProps={{ disabled: checkInputComplete}} />
+    <MuiOtpInput autoFocus gap={1} length={7} validateChar={(text) => !isNaN(text)} value={otp} onChange={handleChange} onComplete={(value) => {setcheckInputComplete(true); checkPrfSubmit(value, setuserExist, setisChecking, setUserInfo, setHasPermissonThisMonth, userRole)}} TextFieldsProps={{ disabled: checkInputComplete}} />
 
     {/* //if the user don't exist */}
     {
@@ -100,17 +100,30 @@ const ExtendUserForm = () => {
         </Box>)
     }
 
+
   {
-    userExist && !isChecking && checkInputComplete && !hasPermissonThisMonth && (
+    userExist && !isChecking && checkInputComplete && !hasPermissonThisMonth && userRole != 'admin' && (
       <h1>ယခုလအတွင်း ဖော်ပြပါထောက်ပို့တပ်သားအတွက် စာရင်းသွင်းထားပြီးပါပြီ။ ထူးခြားဖြစ်စဥ် ဖြစ်ပါက Admin ကိုဆက်သွယ်ပါ</h1>
     )
   }
-  
+  {/* for the admin */}
+  {
+    userExist && !isChecking && checkInputComplete && userRole == 'admin' && (
+      <>
+              <h1>ဒီ user က ဒီလအတွက် သွင်းပြီးသွားပါပြီ။ Admin အနေနဲ့ဆက်ဖြည့်ချင်ပါသလား။</h1>
+                <ExtendOrNot userInfo={userInfo} sethasContinue={sethasContinue}/>
+              </>
+    )
+  }
+
+  {/* for the user */}
   {
     userExist && !isChecking  && checkInputComplete && hasPermissonThisMonth && (
       <ExtendOrNot userInfo={userInfo} sethasContinue={sethasContinue}/>
     )
   }
+
+  
 
     {
       userExist && !loading && hasContinue && (

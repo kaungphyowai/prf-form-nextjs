@@ -3,7 +3,7 @@ import React from 'react'
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import ExtendUserForm from './ExtendUserForm'
 
-const ExtendUser = () => {
+const ExtendUser = ({userRole}) => {
 
    return(
     <Box
@@ -20,7 +20,7 @@ const ExtendUser = () => {
     <Typography component="h1" variant="h5">
     PRFHQ Member Extend Form
     </Typography>
-    <ExtendUserForm />
+    <ExtendUserForm userRole={userRole} />
   </Box>
        )
 }

@@ -1,5 +1,11 @@
 {
   "AppSyncApiName": "prfformnext",
   "DynamoDBBillingMode": "PAY_PER_REQUEST",
-  "DynamoDBEnableServerSideEncryption": false
+  "DynamoDBEnableServerSideEncryption": false,
+  "AuthCognitoUserPoolId": {
+    "Fn::GetAtt": [
+      "authprfformnext3d1b796f",
+      "Outputs.UserPoolId"
+    ]
+  }
 }

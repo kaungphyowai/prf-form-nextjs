@@ -8,7 +8,7 @@ import CreateForm from "../CreateForm";
 import ExtendForm from "../ExtendForm";
 import { useSearchParams } from 'next/navigation'
 
-export default function CheckUser() {
+export default function CheckUser({userRole}) {
     const [userExistState, setUserExistState] = useState(false);
 
     const [finishCheck, setFinishCheck] = useState(false)
@@ -26,7 +26,7 @@ export default function CheckUser() {
       <CircularProgress />
     </Box>):
       (<> 
-        <Box component="form" onSubmit={(event) => checkUserSubmit(event, setUserExistState, setFinishCheck, setCreateFormShow, setUserInfo, setHasPermissonThisMonth)}  sx={{ mt: 1 }}>
+        <Box component="form" onSubmit={(event) => checkUserSubmit(event, setUserExistState, setFinishCheck, setCreateFormShow, setUserInfo, setHasPermissonThisMonth, userRole)}  sx={{ mt: 1 }}>
           <TextField
               autoFocus
               margin="normal"
@@ -62,7 +62,15 @@ export default function CheckUser() {
 
           {/* If user don't have permission */}
           {
-            !hasPermissonThisMonth && <h1>ယခုလအတွင်း ဖော်ပြပါထောက်ပို့တပ်သားအတွက် စာရင်းသွင်းထားပြီးပါပြီ။ ထူးခြားဖြစ်စဥ် ဖြစ်ပါက Admin ကိုဆက်သွယ်ပါ</h1>
+            !hasPermissonThisMonth && userRole !== 'admin' && <h1>ယခုလအတွင်း ဖော်ပြပါထောက်ပို့တပ်သားအတွက် စာရင်းသွင်းထားပြီးပါပြီ။ ထူးခြားဖြစ်စဥ် ဖြစ်ပါက Admin ကိုဆက်သွယ်ပါ</h1>
+          }
+          {
+            !hasPermissonThisMonth && userRole == 'admin' && (
+              <>
+              <h1>ဒီ user က ဒီလအတွက် သွင်းပြီးသွားပါပြီ။ Admin အနေနဲ့ဆက်ဖြည့်ချင်ပါသလား။</h1>
+                <ExtendOrNot userInfo={userInfo} sethasContinue={sethasContinue}/>
+              </>
+            )
           }
 
                 {/* Ask want to extend or not */}

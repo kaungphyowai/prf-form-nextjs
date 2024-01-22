@@ -2,7 +2,7 @@
 // return if user don't exist => side effect
 // if user exist => side effect + userInfo
 
-export default async function checkPrfSubmit(prfno ,setuserExist, setisChecking, setUserInfo, setHasPermissonThisMonth) {
+export default async function checkPrfSubmit(prfno ,setuserExist, setisChecking, setUserInfo, setHasPermissonThisMonth, userRole) {
 
     console.log(prfno);
     setisChecking(true)
@@ -55,6 +55,16 @@ export default async function checkPrfSubmit(prfno ,setuserExist, setisChecking,
         setisChecking(false)
         setHasPermissonThisMonth(bool);
         setuserExist(true);
+        if(userRole == 'admin')
+        {
+            setUserInfo({
+                'name': json.name,
+                'email': json.email,
+                'prf_no': json.prf_no,
+                'expire_date': json.expire_date
+            })
+        }
+
         return;
     }
     setHasPermissonThisMonth(true);

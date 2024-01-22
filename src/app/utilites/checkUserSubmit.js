@@ -1,7 +1,7 @@
 
 
 
-export default async function checkUserSubmit(event, setUserExistState, setFinishCheck, setCreateFormShow, setUserInfo, setHasPermissonThisMonth) {
+export default async function checkUserSubmit(event, setUserExistState, setFinishCheck, setCreateFormShow, setUserInfo, setHasPermissonThisMonth, userRole) {
     
     event.preventDefault();
     setFinishCheck(true)
@@ -36,6 +36,7 @@ export default async function checkUserSubmit(event, setUserExistState, setFinis
     //if user exist, get PRF and expire data about user
     if(userExist)
     {
+        
         //check if the user has permission
         console.log("This is has permission: ")
         let response = await fetch("/api/checkPermission/", requestOptions)
@@ -45,6 +46,18 @@ export default async function checkUserSubmit(event, setUserExistState, setFinis
         if(!bool)
         {
             setHasPermissonThisMonth(bool)
+            //if user is admin, setUserInfo for just in case
+            if(userRole == 'admin')
+            {
+                setUserInfo({
+                    "name": name,
+                    "email": email,
+                    "prf_no": answer['prf_no'],
+                    "expire_date": answer['expire_date'][0]
+                });
+                
+            }
+
             return;
         }
         setUserInfo({

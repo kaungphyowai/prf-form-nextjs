@@ -3,7 +3,7 @@ import React from 'react'
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import CheckUser from './CheckUser';
 
-const CreateOrExtend = () => {
+const CreateOrExtend = ({userRole}) => {
   return (
     <Box
           sx={{
@@ -19,7 +19,7 @@ const CreateOrExtend = () => {
           <Typography component="h1" variant="h5">
           PRFHQ Member Registration Form
           </Typography>
-          <CheckUser />
+          <CheckUser userRole={userRole}/>
         </Box>
   )
 }

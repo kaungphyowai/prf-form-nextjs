@@ -115,10 +115,10 @@ function HomePage({ signOut, user }) {
         status === 'loading' && <CircularProgress />
       }
         {
-         ( userRole =='admin' || status === 'enable') && page == 1 && <CreateOrExtend />
+         ( userRole =='admin' || status === 'enable') && page == 1 && <CreateOrExtend userRole={userRole} />
         }
         {
-          ( userRole =='admin' || status === 'enable') && page == 2 && <ExtendUser />
+          ( userRole =='admin' || status === 'enable') && page == 2 && <ExtendUser userRole={userRole} />
         }
         {
           userRole =='admin' && page == 3 && <OpenCloseForm status={status}  />
