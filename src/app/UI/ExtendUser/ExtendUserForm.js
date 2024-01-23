@@ -108,7 +108,7 @@ const ExtendUserForm = ({userRole}) => {
   }
   {/* for the admin */}
   {
-    userExist && !isChecking && checkInputComplete && userRole == 'admin' && (
+    userExist && !isChecking && checkInputComplete && !hasPermissonThisMonth && userRole == 'admin' && (
       <>
               <h1>ဒီ user က ဒီလအတွက် သွင်းပြီးသွားပါပြီ။ Admin အနေနဲ့ဆက်ဖြည့်ချင်ပါသလား။</h1>
                 <ExtendOrNot userInfo={userInfo} sethasContinue={sethasContinue}/>
