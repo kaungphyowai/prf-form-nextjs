@@ -29,6 +29,7 @@ import CloudUploadIcon from '@mui/icons-material/CloudUpload';
 import { styled } from '@mui/material/styles';
 import CreateOrExtend from './UI/CreateOrExtend/CreateOrExtend'
 import ResponsiveAppBar from './UI/AppBar/AppBar'
+import LabAppBar from './UI/AppBar/labAppBar'
 import ExtendUser from './UI/ExtendUser/ExtendUser'
 import { Amplify, Auth } from 'aws-amplify';
 import { withAuthenticator } from '@aws-amplify/ui-react';
@@ -108,6 +109,7 @@ function HomePage({ signOut, user }) {
     <UserContext.Provider value={user}>
       <Container component='main' maxWidth='xl' disableGutters>
         <ResponsiveAppBar setPage={setPage} signOut={signOut} userRole={userRole} />
+        {/* <LabAppBar setPage={setPage} signOut={signOut} userRole={userRole} /> */}
         <CssBaseline />
         
     <Container component='section' maxWidth='xs'>
@@ -122,6 +124,9 @@ function HomePage({ signOut, user }) {
         }
         {
           userRole =='admin' && page == 3 && <OpenCloseForm status={status}  />
+        }
+        {
+          userRole == 'admin' || userRole == 'user' && page == 4 && <h1>Hello </h1>
         }
         {
           status === 'disable' && userRole == 'user' && 

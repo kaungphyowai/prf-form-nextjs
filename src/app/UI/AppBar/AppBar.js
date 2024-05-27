@@ -21,7 +21,7 @@ function ResponsiveAppBar({setPage, signOut, userRole}) {
   const [anchorElUser, setAnchorElUser] = React.useState(null);
 
   //Check if the user is Admin or not
-  const navItems = userRole !== 'admin' ? ['အသစ်သွင်းခြင်း', 'သက်တမ်းတိုးခြင်း'] : ['အသစ်သွင်းခြင်း', 'သက်တမ်းတိုးခြင်း', 'ဖောင်အဖွင့်အပိတ်'];
+  const navItems = userRole !== 'admin' ? ['အသစ်သွင်းခြင်း', 'သက်တမ်းတိုးခြင်း', 'အချက်အလက်ပြင်ဆင်ခြင်း'] : ['အသစ်သွင်းခြင်း', 'သက်တမ်းတိုးခြင်း', 'ဖောင်အဖွင့်အပိတ်', 'အချက်အလက်ပြင်ဆင်ခြင်း'];
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -58,6 +58,10 @@ function ResponsiveAppBar({setPage, signOut, userRole}) {
         console.log(page)
         setPage(3);
     }
+    else if(page == 'အချက်အလက်ပြင်ဆင်ခြင်း')
+    {
+      setPage(4);
+    }
     else
     {
       setPage(2);
@@ -65,29 +69,13 @@ function ResponsiveAppBar({setPage, signOut, userRole}) {
   }
 
   return (
-    <AppBar position="static">
+    <AppBar position="static" sx={{backgroundColor: "#DC2626"}}>
       <Container maxWidth="xl">
-        <Toolbar disableGutters>
-          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: 'none', md: 'flex' },
-              fontFamily: 'monospace',
-              fontWeight: 700,
-              letterSpacing: '.3rem',
-              color: 'inherit',
-              textDecoration: 'none',
-            }}
-          >
-            PRFHQ
-          </Typography>
+        <Toolbar disableGutters sx={{display: 'flex'}}>
+          <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }}} />
+          
 
-          <Box sx={{ display: { xs: 'none', sm: 'block' }, flexGrow: 1}}>
+          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'center', margin: 'auto' }}>
             {navItems.map((item) => (
               <Button key={item} sx={{ color: '#fff' }} onClick={() => handleClick(item)}>
                 {item}

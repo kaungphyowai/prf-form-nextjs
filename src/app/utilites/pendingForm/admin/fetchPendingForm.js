@@ -1,4 +1,6 @@
-function fetchPendingForm()
+let db = require('../db')
+
+async function fetchPendingForm()
 {
     // query to the database
     // 1. Status should be pending
@@ -8,6 +10,8 @@ function fetchPendingForm()
 
 
     // 
+    databaseName = "Pending_Approvals";
+    result = await db(`Select * From ${databaseName}`, []);
 
     return [
         {
