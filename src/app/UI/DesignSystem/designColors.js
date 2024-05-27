@@ -45,3 +45,7 @@ let shade =
     'White': "#FFFFFF",
     "Black": "#000000"
 }
+
+export default {
+    neutral,primary,secondary,shade
+}

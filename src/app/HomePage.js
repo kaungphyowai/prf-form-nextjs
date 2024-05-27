@@ -2,7 +2,6 @@
 
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -11,7 +10,6 @@ import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
@@ -40,9 +38,12 @@ import { generateClient } from 'aws-amplify/api';
 import { createApp, updateApp, deleteApp } from '../graphql/mutations';
 import { listApps } from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
-
+import Button from './UI/Button/Button'
+import colors from './UI/DesignSystem/designColors'
 
 import OpenCloseForm from './UI/OpenCloseForm.js'
+import CaptionComponent from './UI/Typography/CaptionComponent';
+import SubHeadingComponent from './UI/Typography/SubHeadingComponent';
 Amplify.configure(config);
 
 const client = generateClient();
@@ -126,7 +127,7 @@ function HomePage({ signOut, user }) {
           userRole =='admin' && page == 3 && <OpenCloseForm status={status}  />
         }
         {
-          userRole == 'admin' || userRole == 'user' && page == 4 && <h1>Hello </h1>
+          userRole == 'admin' || userRole == 'user' && page == 4 && <Button><CaptionComponent variant='semi-bold' textColor={colors.neutral.Gray50} >K</CaptionComponent></Button>
         }
         {
           status === 'disable' && userRole == 'user' && 
