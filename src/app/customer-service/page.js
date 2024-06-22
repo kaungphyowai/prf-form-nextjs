@@ -9,10 +9,13 @@ import { useState } from "react";
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
 import TabList from "@mui/lab/TabList";
+import SearchIcon from "@mui/icons-material/Search";
 import TabPanel from "@mui/lab/TabPanel";
+import CustomInput from "../../components/custom/custom-input";
 import ContainedButton from "../../components/custom/contained-button";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 import ConfirmCancelDialog from "../../components/table/dialog/confirm-cancel";
+import InputAdornment from "@mui/material/InputAdornment";
 
 function Page() {
   const [value, setValue] = useState("pending"); // default tab
@@ -60,7 +63,15 @@ function Page() {
       <Header />
       <Box>
         <TabContext value={value}>
-          <Box paddingX="16px">
+          <Box
+            paddingX="16px"
+            display={{
+              xs: "block",
+              md: "flex",
+            }}
+            justifyContent="space-between"
+            alignItems="center"
+          >
             <TabList
               onChange={handleChange}
               aria-label="status"
@@ -100,6 +111,23 @@ function Page() {
                 disableRipple
               />
             </TabList>
+
+            <CustomInput
+              sx={{
+                marginTop: {
+                  xs: "10px",
+                  md: "0px",
+                },
+              }}
+              placeholder="Search"
+              InputProps={{
+                startAdornment: (
+                  <InputAdornment position="start">
+                    <SearchIcon sx={{ color: "#000000" }} />
+                  </InputAdornment>
+                ),
+              }}
+            />
           </Box>
           {/* panding tab */}
           <TabPanel value="pending" sx={{ padding: "0px" }}>

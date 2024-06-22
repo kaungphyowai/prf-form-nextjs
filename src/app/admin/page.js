@@ -66,7 +66,10 @@ function Page() {
         <TabContext value={value}>
           <Box
             paddingX="16px"
-            display="flex"
+            display={{
+              xs: "block",
+              md: "flex",
+            }}
             justifyContent="space-between"
             alignItems="center"
           >
@@ -111,6 +114,12 @@ function Page() {
             </TabList>
 
             <CustomInput
+              sx={{
+                marginTop: {
+                  xs: "10px",
+                  md: "0px",
+                },
+              }}
               placeholder="Search"
               InputProps={{
                 startAdornment: (
