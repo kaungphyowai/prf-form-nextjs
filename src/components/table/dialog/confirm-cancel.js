@@ -25,7 +25,7 @@ export default function ConfirmCancelDialog({
         <DialogContent
           sx={{
             paddingBottom: "5px",
-            maxWidth: "200px",
+            maxWidth: "240px",
           }}
         >
           <DialogContentText id="alert-dialog-description">

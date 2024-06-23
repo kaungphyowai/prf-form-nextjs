@@ -75,6 +75,10 @@ export default function LeaveCommentDialog({
           variant="contained"
           onClick={() => handleSubmit(comment)}
           autoFocus
+          sx={{
+            backgroundColor: "#CBD5E1",
+            color: "#94A3B8",
+          }}
         >
           Submit Denial
         </ContainedButton>

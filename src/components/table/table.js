@@ -18,7 +18,8 @@ export default function BasicTable({ headers, rows, children }) {
               <TableCell
                 key={header}
                 sx={{
-                  borderBottom: "none",
+                  fontSize: "16px",
+              fontWeight: "600",
                 }}
               >
                 {header}
@@ -37,12 +38,16 @@ export default function BasicTable({ headers, rows, children }) {
                 scope="row"
                 sx={{
                   borderBottom: "none",
+                  fontSize: "14px",
+                  fontWeight: "400",
                 }}
               >
                 {row.newName}
               </TableCell>
               <TableCell
                 sx={{
+                  fontSize: "14px",
+                  fontWeight: "400",
                   borderBottom: "none",
                 }}
               >
@@ -50,6 +55,8 @@ export default function BasicTable({ headers, rows, children }) {
               </TableCell>
               <TableCell
                 sx={{
+                  fontSize: "14px",
+                  fontWeight: "400",
                   borderBottom: "none",
                 }}
               >
@@ -57,6 +64,8 @@ export default function BasicTable({ headers, rows, children }) {
               </TableCell>
               <TableCell
                 sx={{
+                  fontSize: "14px",
+                  fontWeight: "400",
                   borderBottom: "none",
                 }}
               >
@@ -65,6 +74,8 @@ export default function BasicTable({ headers, rows, children }) {
               <TableCell
                 align="right"
                 sx={{
+                  fontSize: "14px",
+                  fontWeight: "400",
                   borderBottom: "none",
                 }}
               >

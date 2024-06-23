@@ -2,7 +2,6 @@
 import TextField from "@mui/material/TextField";
 import { styled } from "@mui/material/styles";
 
-
 const CustomInput = styled(TextField)(() => ({
   color: "#000000",
   backgroundColor: "#F1F5F9",
@@ -14,9 +13,6 @@ const CustomInput = styled(TextField)(() => ({
     border: "none !important",
     padding: "0px !important",
     height: "40px",
-    "&::placeholder": {
-      color: "black",
-    },
   },
   "& fieldset": {
     border: "none",

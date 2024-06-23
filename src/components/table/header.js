@@ -4,8 +4,21 @@ import Link from "next/link";
 import MenuIcon from "@mui/icons-material/Menu";
 import { useState } from "react";
 
-function Header({ justifyContent }) {
-  const links = ["Text Here", "Text Here", "Text Here"];
+function Header({ LinksPostion }) {
+  const links = [
+    {
+      name: "Text Here",
+      path: "#",
+    },
+    {
+      name: "Text Here",
+      path: "#",
+    },
+    {
+      name: "Text Here",
+      path: "#",
+    },
+  ];
 
   const [anchorElNav, setAnchorElNav] = useState(null);
 
@@ -44,13 +57,21 @@ function Header({ justifyContent }) {
             gap: "16px",
             marginLeft: "30px",
             // change order based on justifyContent param
-            maxWidth: `${justifyContent == "space-between" ? "fit-content" : "100%"}`,
+            maxWidth: `${LinksPostion == "center" ? "fit-content" : "100%"}`,
           }}
         >
-          {links.map((link) => (
-            <Link href="#" key={link} style={{ textDecoration: "none" }}>
-              <Typography sx={{ my: 2, color: "white", display: "block" }}>
-                {link}
+          {links.map(({ name, path }) => (
+            <Link href={path} key={path} style={{ textDecoration: "none" }}>
+              <Typography
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  fontSize: "16px",
+                  fontWeight: "600",
+                }}
+              >
+                {name}
               </Typography>
             </Link>
           ))}
@@ -90,12 +111,19 @@ function Header({ justifyContent }) {
               display: { xs: "block", md: "none" },
             }}
           >
-            {links.map((link) => (
-              <Link href="#" key={link} style={{ textDecoration: "none" }}>
+            {links.map(({ name, path }) => (
+              <Link href={path} key={path} style={{ textDecoration: "none" }}>
                 <Typography
-                  sx={{ mx: 2, my: 1, color: "black", display: "block" }}
+                  sx={{
+                    mx: 2,
+                    my: 1,
+                    color: "black",
+                    display: "block",
+                    fontSize: "16px",
+                    fontWeight: "600",
+                  }}
                 >
-                  {link}
+                  {name}
                 </Typography>
               </Link>
             ))}

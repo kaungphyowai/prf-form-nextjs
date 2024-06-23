@@ -5,7 +5,7 @@ import React from "react";
 function page() {
   return (
     <>
-      <Header justifyContent={"space-between"} />
+      <Header LinksPostion={"center"} />
       <FormEditAccountInfo />
     </>
   );

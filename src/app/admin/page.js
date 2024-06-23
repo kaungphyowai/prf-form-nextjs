@@ -1,30 +1,19 @@
 "use client";
 import BasicTable from "../../components/table/table";
 import Header from "../../components/table/header";
-import { Box } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
 import { useState } from "react";
-import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
-import TabList from "@mui/lab/TabList";
 import TabPanel from "@mui/lab/TabPanel";
-import SearchIcon from "@mui/icons-material/Search";
 import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
-import InputAdornment from "@mui/material/InputAdornment";
+import { Box } from "@mui/material";
 import ContainedButton from "../../components/custom/contained-button";
 import OutlinedButton from "../../components/custom/outlined-button";
-import CustomInput from "../../components/custom/custom-input";
 import LeaveCommentDialog from "../../components/table/dialog/leave-comment";
+import TableTabs from "../../components/table/tabs"
 
 function Page() {
-  const [value, setValue] = useState("pending"); // default tab
-
-  // handle tab change (add logic here / you can call your api here)
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
   // rows and headers
   const rows = [
     {
@@ -41,7 +30,26 @@ function Page() {
     },
   ];
 
-  const headers = ["Old Info", "", "New Info"];
+  const headers = ["Old Info", "", "New Info" , "" , ""];
+
+  // tabs
+  const [value, setValue] = useState("pending"); // default tab
+
+  const tabsList = [
+    { label: "Pending", value: "pending" },
+    { label: "Denied", value: "denied" },
+  ];
+
+  // handle tab change (add logic here / you can call your api here)
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
+
+  // search
+  const [searchValue, setSearchValue] = useState("");
+  const handleSearchChange = (event) => {
+    setSearchValue(event.target.value);
+  };
 
   // handle dialog
   const [open, setOpen] = useState(false);
@@ -61,75 +69,10 @@ function Page() {
 
   return (
     <Box>
-      <Header />
+      <Header LinksPostion={"center"} />
       <Box>
         <TabContext value={value}>
-          <Box
-            paddingX="16px"
-            display={{
-              xs: "block",
-              md: "flex",
-            }}
-            justifyContent="space-between"
-            alignItems="center"
-          >
-            <TabList
-              onChange={handleChange}
-              aria-label="status"
-              sx={{
-                ".MuiTabs-indicator": {
-                  backgroundColor: "black",
-                },
-              }}
-            >
-              <Tab
-                label="Pending"
-                value="pending"
-                sx={{
-                  paddingX: "0px",
-                  paddingBottom: "5px",
-                  minWidth: "fit-content",
-                  color: "black",
-                  marginRight: "15px",
-                  "&.Mui-selected": {
-                    color: "black",
-                  },
-                }}
-                disableRipple
-              />
-              <Tab
-                label="Denied"
-                value="denied"
-                sx={{
-                  paddingX: "0px",
-                  paddingBottom: "5px",
-                  minWidth: "fit-content",
-                  color: "black",
-                  "&.Mui-selected": {
-                    color: "black",
-                  },
-                }}
-                disableRipple
-              />
-            </TabList>
-
-            <CustomInput
-              sx={{
-                marginTop: {
-                  xs: "10px",
-                  md: "0px",
-                },
-              }}
-              placeholder="Search"
-              InputProps={{
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon sx={{ color: "#000000" }} />
-                  </InputAdornment>
-                ),
-              }}
-            />
-          </Box>
+          <TableTabs handleTabChange={handleChange} tabList={tabsList} handleSearchChange={handleSearchChange} searchValue={searchValue} />
           {/* panding tab */}
           <TabPanel value="pending" sx={{ padding: "0px" }}>
             <BasicTable headers={headers} rows={rows}>

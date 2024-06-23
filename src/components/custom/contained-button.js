@@ -8,6 +8,8 @@ const ContainedButton = styled(Button)(() => ({
   height: "33px",
   backgroundColor: "#475569",
   boxShadow: "none !important",
+  fontSize: "14px",
+  fontWeight: "600",
   "&:hover": {
     backgroundColor: "#475569",
   },

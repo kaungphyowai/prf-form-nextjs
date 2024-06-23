@@ -8,6 +8,9 @@ const OutlinedButton = styled(Button)(() => ({
   height: "33px",
   borderColor: "#94A3B8",
   color: "#94A3B8",
+  border: "1px solid",
+  fontSize: "14px",
+  fontWeight: "600",
   "&:hover": {
     backgroundColor: "#94A3B8",
     color: "#fff",
