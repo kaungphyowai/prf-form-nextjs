@@ -1,7 +1,7 @@
 "use client";
 import BasicTable from "../../components/table/table";
 import Header from "../../components/table/header";
-import { Box } from "@mui/material";
+import { Box, formControlClasses } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
 import DoneIcon from "@mui/icons-material/Done";
 import Button from "@mui/material/Button";
@@ -22,20 +22,20 @@ function Page() {
   // rows and headers
   const rows = [
     {
+      formId: 12345678,
       newName: "name goes here",
       newEmail: "gmail@gmail.com",
       oldName: "name goes here",
       oldEmail: "gmail@gmail.com",
     },
     {
+      formId: 12345678,
       newName: "name goes here",
       newEmail: "gmail@gmail.com",
       oldName: "name goes here",
       oldEmail: "gmail@gmail.com",
     },
   ];
-
-  const headers = ["Old Info", "", "New Info" , "" , ""];
 
   // tabs
   const [value, setValue] = useState("pending"); // default tab
@@ -82,9 +82,9 @@ function Page() {
             handleSearchChange={handleSearchChange}
             searchValue={searchValue}
           />
-          {/* panding tab */}
+          {/* pending tab */}
           <TabPanel value="pending" sx={{ padding: "0px" }}>
-            <BasicTable headers={headers} rows={rows}>
+            <BasicTable rows={rows}>
               <ContainedButton
                 onClick={handleClickOpen}
                 variant="contained"
@@ -96,7 +96,7 @@ function Page() {
           </TabPanel>
           <TabPanel value="denied" sx={{ padding: "0px" }}>
             {/* denied tab */}
-            <BasicTable headers={headers} rows={rows}>
+            <BasicTable rows={rows}>
               <ContainedButton
                 variant="contained"
                 endIcon={<KeyboardArrowDownIcon />}

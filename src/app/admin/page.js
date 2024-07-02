@@ -11,26 +11,28 @@ import { Box } from "@mui/material";
 import ContainedButton from "../../components/custom/contained-button";
 import OutlinedButton from "../../components/custom/outlined-button";
 import LeaveCommentDialog from "../../components/table/dialog/leave-comment";
-import TableTabs from "../../components/table/tabs"
+import TableTabs from "../../components/table/tabs";
 
 function Page() {
   // rows and headers
   const rows = [
     {
+      formId: 12345678,
+      message: "submitted by Mg Mg at 3:00 on 1.1.2024",
       newName: "name goes here",
       newEmail: "gmail@gmail.com",
       oldName: "name goes here",
       oldEmail: "gmail@gmail.com",
     },
     {
+      formId: 12345678,
+      message: "submitted by Mg Mg at 3:00 on 1.1.2024",
       newName: "name goes here",
       newEmail: "gmail@gmail.com",
       oldName: "name goes here",
       oldEmail: "gmail@gmail.com",
     },
   ];
-
-  const headers = ["Old Info", "", "New Info" , "" , ""];
 
   // tabs
   const [value, setValue] = useState("pending"); // default tab
@@ -72,10 +74,15 @@ function Page() {
       <Header LinksPostion={"center"} />
       <Box>
         <TabContext value={value}>
-          <TableTabs handleTabChange={handleChange} tabList={tabsList} handleSearchChange={handleSearchChange} searchValue={searchValue} />
-          {/* panding tab */}
+          <TableTabs
+            handleTabChange={handleChange}
+            tabList={tabsList}
+            handleSearchChange={handleSearchChange}
+            searchValue={searchValue}
+          />
+          {/* pending tab */}
           <TabPanel value="pending" sx={{ padding: "0px" }}>
-            <BasicTable headers={headers} rows={rows}>
+            <BasicTable rows={rows}>
               <OutlinedButton
                 onClick={handleClickOpen}
                 variant="outlined"
@@ -90,7 +97,7 @@ function Page() {
           </TabPanel>
           <TabPanel value="denied" sx={{ padding: "0px" }}>
             {/* denied tab */}
-            <BasicTable headers={headers} rows={rows}>
+            <BasicTable rows={rows}>
               <ContainedButton
                 variant="contained"
                 endIcon={<KeyboardArrowDownIcon />}

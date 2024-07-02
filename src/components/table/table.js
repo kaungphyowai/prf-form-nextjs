@@ -6,6 +6,7 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
 
 // reusable table for all pages
 export default function BasicTable({ headers, rows, children }) {
@@ -14,17 +15,41 @@ export default function BasicTable({ headers, rows, children }) {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            {headers.map((header) => (
-              <TableCell
-                key={header}
+            <TableCell
+              sx={{
+                fontSize: "16px",
+                fontWeight: "600",
+                display: "flex",
+                alignItems: "center",
+              }}
+            >
+              <Box
                 sx={{
-                  fontSize: "16px",
-              fontWeight: "600",
+                  marginRight: "10px",
+                  backgroundColor: "#F1F5F9",
+                  minWidth: "80px",
+                  paddingY: "10px",
+                  borderRadius: "8px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
                 }}
               >
-                {header}
-              </TableCell>
-            ))}
+                Form ID
+              </Box>
+              <Box>Old Info</Box>
+            </TableCell>
+            <TableCell></TableCell>
+            <TableCell
+              sx={{
+                fontSize: "16px",
+                fontWeight: "600",
+              }}
+            >
+              New Info
+            </TableCell>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -42,7 +67,29 @@ export default function BasicTable({ headers, rows, children }) {
                   fontWeight: "400",
                 }}
               >
-                {row.newName}
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Box
+                    sx={{
+                      marginRight: "10px",
+                      backgroundColor: "#F1F5F9",
+                      minWidth: "80px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      paddingY: "10px",
+                      borderRadius: "8px",
+                      fontWeight: "600",
+                    }}
+                  >
+                    {row.formId}
+                  </Box>
+                  <Typography>{row.newName}</Typography>
+                </Box>
+                {row.message && (
+                  <Typography fontSize="10px" color="#94A3B8" fontWeight="400">
+                    {row.message}
+                  </Typography>
+                )}
               </TableCell>
               <TableCell
                 sx={{
