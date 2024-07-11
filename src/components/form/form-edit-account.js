@@ -10,7 +10,7 @@ import DoneIcon from "@mui/icons-material/Done";
 import RotateLeftIcon from "@mui/icons-material/RotateLeft";
 import InformationOverlayDialog from "./dialog/information-overlay";
 
-const FormEditAccountInfo = () => {
+const FormEditAccountInfo = ({cardNo}) => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("addressgoeshere@domain.com");
   const [NameErrorMessage, setNameErrorMessage] = useState(
@@ -24,7 +24,33 @@ const FormEditAccountInfo = () => {
   const [open, setOpen] = useState(false);
 
   const handleClickOpen = () => {
+    // verify if there is no error
+
+
+    // submit to review stage
+    const myHeaders = new Headers();
+myHeaders.append("Content-Type", "application/json");
+
+const raw = JSON.stringify({
+  "prfhqid": cardNo,
+  "name": name,
+  "email": email,
+});
+
+const requestOptions = {
+  method: "POST",
+  headers: myHeaders,
+  body: raw,
+  redirect: "follow"
+};
+
+fetch("/api/submitForm", requestOptions)
+  .then((response) => response.json())
+  .then((result) => console.log(result))
+  .catch((error) => console.error(error));
+
     setOpen(true);
+
   };
 
   const handleClose = () => {
@@ -80,6 +106,7 @@ const FormEditAccountInfo = () => {
           }}
           placeholder="Name Goes Here"
           value={name}
+          onChange={(e) => setName(e.target.value)}
           InputProps={{
             endAdornment: (
               <InputAdornment position="end">
@@ -114,6 +141,7 @@ const FormEditAccountInfo = () => {
         </Typography>
         <TextField
           value={email}
+          onChange={(e) => setEmail(e.target.value)}
           sx={{
             color: "#000000",
             backgroundColor: "#fffff",
@@ -171,7 +199,7 @@ const FormEditAccountInfo = () => {
           padding="10px 15px"
           borderRadius="14px"
         >
-          1249849
+          {cardNo}
         </Box>
       </Box>
       <Box display="flex" alignItems="center" gap="10px" marginTop="20px">

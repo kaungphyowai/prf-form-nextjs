@@ -7,9 +7,14 @@ import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import OutlinedButton from "../custom/outlined-button";
+import ContainedButton from "../custom/contained-button";
+import CloseIcon from "@mui/icons-material/Close";
+import DoneIcon from "@mui/icons-material/Done";
+import KeyboardArrowDownIcon from "@mui/icons-material/KeyboardArrowDown";
 
 // reusable table for all pages
-export default function BasicTable({ headers, rows, children }) {
+export default function AdminTable({ headers, rows, pending, handleClickOpen, handleApproved }) {
   return (
     <TableContainer component={Paper} sx={{ boxShadow: "none" }}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -81,7 +86,7 @@ export default function BasicTable({ headers, rows, children }) {
                       fontWeight: "600",
                     }}
                   >
-                    {row.formId}
+                    {row.prfhq_id}
                   </Box>
                   <Typography>{row.oldName}</Typography>
                 </Box>
@@ -133,8 +138,36 @@ export default function BasicTable({ headers, rows, children }) {
                     justifyContent: "flex-end",
                   }}
                 >
-                  {/* buttons as children */}
-                  {children}
+                {
+                    pending && (
+                        <>
+                        <OutlinedButton
+                onClick={() => {
+                    handleClickOpen(row.formId)
+                }}
+                variant="outlined"
+                startIcon={<CloseIcon color="#94A3B8" />}
+              >
+                Deny
+              </OutlinedButton>
+              <ContainedButton variant="contained" startIcon={<DoneIcon />}
+              onClick={() => handleApproved(row.formId)}
+              >
+                Approved
+              </ContainedButton>
+                        </>
+                    )
+                }
+                {
+                    !pending && (
+                        <ContainedButton
+                variant="contained"
+                endIcon={<KeyboardArrowDownIcon />}
+              >
+                view admin comments
+              </ContainedButton>
+                    )
+                }
                 </Box>
               </TableCell>
             </TableRow>

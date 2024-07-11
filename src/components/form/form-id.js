@@ -4,17 +4,39 @@ import { MuiOtpInput } from "mui-one-time-password-input";
 import { Box, Typography } from "@mui/material";
 import ContainedButton from "../custom/contained-button";
 import InfoOutlinedIcon from "@mui/icons-material/InfoOutlined";
+import FormEditAccountInfo from "./form-edit-account";
 
 const FormId = () => {
   const [id, setId] = useState("");
   const [errorMessage, setErrorMessage] = useState(""); // message: "Can’t proceed. This ID is already in the review stage."
-
+  const [verified, setVerified] = useState(false);
   const handleChange = (newValue) => {
     setId(newValue);
   };
 
   const handleVerifyId = () => {
-    console.log(id);
+    setVerified(true);
+
+    // check if the id has been in the review form database
+    const requestOptions = {
+      method: "POST",
+      redirect: "follow"
+    };
+    fetch("/api/fetchPendingForms", requestOptions)
+    .then((response) => response.json())
+    .then((result) => {
+      let rowstmp = result.forEach(ele => {
+        // chekc if ID is in review stage
+        let newID = parseInt(id);
+        if(ele.prfhq_id ==newID)
+        {
+           setErrorMessage("Can't proceed. This ID is already in review stage");
+
+        }
+      })
+
+    })
+    .catch((error) => console.error(error));
   };
 
   return (
@@ -26,6 +48,9 @@ const FormId = () => {
         marginRight: "auto",
       }}
     >
+      {
+        (!verified || errorMessage !== '') &&
+      <>
       <Typography
         textTransform="capitalize"
         fontSize={{
@@ -100,6 +125,9 @@ const FormId = () => {
       >
         Verify
       </ContainedButton>
+      </>
+      }
+      {verified && errorMessage == '' && <FormEditAccountInfo cardNo={parseInt(id)} />}
     </Box>
   );
 };

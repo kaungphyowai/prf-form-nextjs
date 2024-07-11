@@ -18,7 +18,6 @@ import { generateClient } from 'aws-amplify/api';
 import { listApps } from '../graphql/queries';
 import * as subscriptions from '../graphql/subscriptions';
 import OpenCloseForm from './UI/OpenCloseForm.js'
-import PendingFormTable from './UI/PendingForm/PendingFormTable'
 
 Amplify.configure(config);
 
@@ -103,7 +102,7 @@ function HomePage({ signOut, user }) {
           userRole =='admin' && page == 3 && <OpenCloseForm status={status}  />
         }
         {
-          userRole == 'admin' || userRole == 'user' && page == 4 && <PendingFormTable></PendingFormTable>
+          // userRole == 'admin' || userRole == 'user' && page == 4 && <PendingFormTable></PendingFormTable>
         }
         {
           status === 'disable' && userRole == 'user' && 
