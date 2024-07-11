@@ -1,11 +1,11 @@
 // Get the client
 import mysql from 'mysql2/promise';
 
-import getDatabaseCredentials from '../secrectManager'; // Adjust the path as needed
+// import getDatabaseCredentials from '../secrectManager'; // Adjust the path as needed
 
 async function db(query, value)
 {
-    const credentials = await getDatabaseCredentials();
+    // const credentials = await getDatabaseCredentials();
     // Create the connection to database
     const connection = await mysql.createConnection({
         host: "34.122.80.169",
