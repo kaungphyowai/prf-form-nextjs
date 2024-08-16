@@ -1,7 +1,7 @@
 {
-  "resourceName": "devimages",
-  "policyUUID": "5658be5c",
-  "bucketName": "hopefuel",
+  "resourceName": "prfForm",
+  "policyUUID": "7539bfc0",
+  "bucketName": "screenshot",
   "storageAccess": "authAndGuest",
   "guestAccess": [
     "READ"
@@ -11,5 +11,6 @@
     "READ",
     "DELETE"
   ],
+  "triggerFunction": "NONE",
   "groupAccess": {}
 }

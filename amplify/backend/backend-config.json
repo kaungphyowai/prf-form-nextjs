@@ -1,10 +1,28 @@
 {
   "api": {
-    "hopefuel": {
-      "dependsOn": [],
+    "prfformnext": {
+      "dependsOn": [
+        {
+          "attributes": [
+            "UserPoolId"
+          ],
+          "category": "auth",
+          "resourceName": "prfformnext3d1b796f"
+        }
+      ],
       "output": {
         "authConfig": {
-          "additionalAuthenticationProviders": [],
+          "additionalAuthenticationProviders": [
+            {
+              "authenticationType": "AWS_IAM"
+            },
+            {
+              "authenticationType": "AMAZON_COGNITO_USER_POOLS",
+              "userPoolConfig": {
+                "userPoolId": "authprfformnext3d1b796f"
+              }
+            }
+          ],
           "defaultAuthentication": {
             "apiKeyConfig": {
               "apiKeyExpirationDays": 7
@@ -18,7 +36,7 @@
     }
   },
   "auth": {
-    "hopefuel3393c0f6": {
+    "prfformnext3d1b796f": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -47,7 +65,7 @@
   },
   "hosting": {
     "amplifyhosting": {
-      "lastPushTimeStamp": "2024-07-18T01:59:53.157Z",
+      "lastPushTimeStamp": "2023-12-03T01:32:32.832Z",
       "service": "amplifyhosting",
       "type": "cicd"
     }
@@ -71,7 +89,7 @@
     }
   },
   "storage": {
-    "devimages": {
+    "prfForm": {
       "dependsOn": [],
       "providerPlugin": "awscloudformation",
       "service": "S3"
