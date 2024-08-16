@@ -20,7 +20,7 @@ export async function GET(request) {
     redirect: 'follow'
     };
 
-    const response = await fetch("https://api.airtable.com/v0/appp80DDZ7FHxqCc1/tblzSjCNMeKe3OleA", requestOptions)
+    const response = await fetch("https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblSRWE7HJcZKXGyP", requestOptions)
    const json = await response.json();
    let records = json.records;
    let answer = {};

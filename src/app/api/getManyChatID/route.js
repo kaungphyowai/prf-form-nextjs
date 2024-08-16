@@ -20,7 +20,7 @@ export async function POST(request) {
         };
         let userNameURL = encodeURIComponent(name)
     let emailURL = encodeURIComponent(email)
-        let response = await fetch(`https://api.airtable.com/v0/appp80DDZ7FHxqCc1/tblm1UaS2JsGRqPrM?fields%5B%5D=manychat_id&filterByFormula=IF(AND(manychat_id+!%3D+BLANK()%2C+manychat_id+!%3D+0%2C+trim_name%3D'${userNameURL}'%2C+Email%3D'${emailURL}')%2C+TRUE()%2C+FALSE()+)`, requestOptions)
+        let response = await fetch(`https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblm1UaS2JsGRqPrM?fields%5B%5D=manychat_id&filterByFormula=IF(AND(manychat_id+!%3D+BLANK()%2C+manychat_id+!%3D+0%2C+trim_name%3D'${userNameURL}'%2C+Email%3D'${emailURL}')%2C+TRUE()%2C+FALSE()+)`, requestOptions)
         json = await response.json()
         let records = json['records']
         if(records.length > 0)

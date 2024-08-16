@@ -21,7 +21,7 @@ export async function POST(request) {
     redirect: 'follow'
 };
 
-    let response = await fetch(`https://api.airtable.com/v0/appp80DDZ7FHxqCc1/tblZeEt4ay83MpLcL?filterByFormula=IF(SEARCH(%22${prfNo}%22%2C+prf_card_no)%2CTRUE()%2CFALSE())`, requestOptions)
+    let response = await fetch(`https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblidhvo53AOty6w0?filterByFormula=IF(SEARCH(%22${prfNo}%22%2C+prf_card_no)%2CTRUE()%2CFALSE())`, requestOptions)
 
     let answer = false;
     json = await response.json();

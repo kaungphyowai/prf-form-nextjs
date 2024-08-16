@@ -17,7 +17,7 @@
 //     let userNameURL = encodeURIComponent(customerName)
 //     let emailURL = encodeURIComponent(customerEmail)
 
-//     let data = await fetch(`https://api.airtable.com/v0/appp80DDZ7FHxqCc1/tblZeEt4ay83MpLcL?fields%5B%5D=prf_card_no&filterByFormula=AND(trim_name%3D'${userNameURL}'%2C+trim_email%3D'${emailURL}')`, requestOptions)
+//     let data = await fetch(`https://api.airtable.com/v0/appI7DFXUC7sezXwg/tblidhvo53AOty6w0?fields%5B%5D=prf_card_no&filterByFormula=AND(trim_name%3D'${userNameURL}'%2C+trim_email%3D'${emailURL}')`, requestOptions)
 //     data = await data.json()
 
 //     return data.records;
