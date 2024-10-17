@@ -178,6 +178,7 @@ import recentExpireDate from '../../utilites/recentExpireDate.js'
 import calculateExpireDate from '../../utilites/calculateExpireDate'
 
 import maxHopeFuelID from '../../utilites/maxHopeFuelID.js'
+import exp from "constants";
 
 
 async function InsertCustomer(
@@ -202,22 +203,28 @@ async function InsertCustomer(
     month
   }
 
-  let isExpired = (recentExpireDate(new Date(), expireDate).getMonth() == new Date().getMonth()) && (recentExpireDate(new Date(), expireDate).getFullYear() == new Date().getFullYear())
+  
   let nextExpireDate = null;
+  let lastDayOfthisMonth = calculateExpireDate(new Date(), 0,0);
+  console.log(lastDayOfthisMonth)
+  console.log(expireDate)
+  let isEedCurrent = (expireDate.getFullYear() >= lastDayOfthisMonth.getFullYear()) && (expireDate.getMonth() >= lastDayOfthisMonth.getMonth());
+  console.log(expireDate.getDate())
+  console.log(lastDayOfthisMonth.getDate())
+  console.log("isEedCurrent is ")
+  console.log(isEedCurrent)
       
-      console.log("The expire date is ")
-      console.log(expireDate)
-      console.log(isExpired)
-      if(isExpired)
+      if(isEedCurrent)
         {
-          nextExpireDate = calculateExpireDate(new Date(), parseInt(month), isExpired)
-          console.log("The calcualte expire date is .")
-          console.log(expireDate)
-
+          
+          nextExpireDate = calculateExpireDate(expireDate, parseInt(month), !isEedCurrent)
+          console.log(nextExpireDate)
         }
         else
         {
-          nextExpireDate = calculateExpireDate(expireDate, parseInt(month), isExpired)
+          nextExpireDate = calculateExpireDate(new Date(), parseInt(month), !isEedCurrent)
+          console.log("The calcualte expire date is .")
+          console.log(expireDate)
         }
 
 

@@ -50,16 +50,16 @@ export async function POST(request) {
     if(result['ExpireDate'])
     {
       let currentExpireDate = new Date(result['ExpireDate'])
-
-      let isExpired = (recentExpireDate(new Date(), currentExpireDate).getMonth() == new Date().getMonth()) && (recentExpireDate(new Date(), currentExpireDate).getFullYear() == new Date().getFullYear())
-
-      if(isExpired)
+      
+      let lastDayOfthisMonth = calculateExpireDate(new Date(), 0,0)
+      let isEedCurrent = (currentExpireDate.getFullYear() >= lastDayOfthisMonth.getFullYear()) && (currentExpireDate.getMonth() >= lastDayOfthisMonth.getMonth());
+      if(isEedCurrent)
       {
-        nextExpireDate = calculateExpireDate(new Date(), parseInt(obj['month']), isExpired)
+        nextExpireDate = calculateExpireDate(currentExpireDate, parseInt(obj['month']), !isEedCurrent)
       }
       else
       {
-        nextExpireDate = calculateExpireDate(currentExpireDate, parseInt(obj['month']), isExpired)
+        nextExpireDate = calculateExpireDate(new Date(), parseInt(obj['month']), !isEedCurrent)
       }
     }
     else
