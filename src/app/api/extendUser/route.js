@@ -101,7 +101,7 @@ export async function POST(request) {
     // add the transaction id and agentid in the same one
 
 
-    // const screenShotIds = await createScreenShot(obj['screenShot'], transactionId)
+    const screenShotIds = await createScreenShot(obj['screenShot'], transactionId)
     return Response.json(result)
   } catch (error) {
     console.error("Error inserting customer:", error);
