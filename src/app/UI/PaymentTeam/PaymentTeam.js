@@ -75,7 +75,7 @@ const PaymentTeam = () => {
   });
 
   const handleScreenShotClick = async (url) => {
-    let tmpURLObj = url
+    let tmpURLObj = await getScreenShotUrl(url);
     if (tmpURLObj ) {
       window.open(tmpURLObj, "_blank");
     }

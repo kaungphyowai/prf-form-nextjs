@@ -23,6 +23,9 @@
       },
       "storage": {
         "prfForm": {}
+      },
+      "api": {
+        "prfformnext": {}
       }
     }
   }
